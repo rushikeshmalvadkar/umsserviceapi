@@ -1,5 +1,10 @@
+server :
+  port : 9091
 spring:
   application:
      name: umsserviceapi
   liquibase:
     enabled: false
+  docker:
+    compose:
+      enabled: false

@@ -3,7 +3,7 @@ server :
 spring:
   application:
      name: umsserviceapi
-  liquibase:
+  Liquibase:
     enabled: false
   docker:
     compose:

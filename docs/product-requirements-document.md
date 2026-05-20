@@ -51,6 +51,8 @@
         * copy icon with tooltip "Copy Short Url"
             * When user click on that copy icon then toaster should show message:
                 * "Short Url copied successfully!"
+    * visit icon with tooltip "Visit Short Url"
+      * When user click on that visit icon short url should open in new TAB
 
 ## Update URLs
 

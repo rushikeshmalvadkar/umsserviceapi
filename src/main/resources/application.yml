@@ -1,10 +1,18 @@
-server :
-  port : 9091
 spring:
   application:
-     name: umsserviceapi
-  Liquibase:
-    enabled: false
+    name: umsserviceapi
+  jpa:
+    open-in-view: false
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-master.xml
+    enabled: true
   docker:
     compose:
       enabled: false
+
+server:
+  port: 9091
+
+logging:
+  file:
+    name: /var/ums/log/umsserviceapi/umsserviceapi.log

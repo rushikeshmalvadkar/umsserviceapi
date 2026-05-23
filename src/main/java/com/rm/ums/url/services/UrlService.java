@@ -4,6 +4,7 @@ import com.rm.ums.common.HeaderHelper;
 import com.rm.ums.common.enums.MenuEnum;
 import com.rm.ums.common.model.response.CustomResponse;
 import com.rm.ums.common.model.response.dto.LoggedInUser;
+import com.rm.ums.url.model.request.CreateUrlRequest;
 import com.rm.ums.url.model.response.OnLoadCreateUrlResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,9 @@ public class UrlService {
         OnLoadCreateUrlResponse onLoadCreateUrlResponse = new OnLoadCreateUrlResponse();
         onLoadCreateUrlResponse.setHeaders(headerHelper.findHeaders(loggedInUser, MenuEnum.CREATE_URL.id()));
         return onLoadCreateUrlResponse;
+    }
+
+    public CustomResponse createUrl(LoggedInUser loggedInUser, CreateUrlRequest createUrlRequest) {
+            return null;
     }
 }

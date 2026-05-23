@@ -1,10 +1,14 @@
 package com.rm.ums.common.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.ZonedDateTime;
 
 @MappedSuperclass
+@Getter
+@Setter
 public class AbstractAuditEntity extends AbstractDeleteFlagEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

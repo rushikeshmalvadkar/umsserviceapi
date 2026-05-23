@@ -6,6 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
+
 public class OnLoadCreateUrlResponse {
-    List<HeaderResponse> headers;
+   private  List<HeaderResponse> headers;
 }

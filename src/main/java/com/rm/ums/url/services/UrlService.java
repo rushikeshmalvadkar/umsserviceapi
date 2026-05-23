@@ -16,7 +16,7 @@ public class UrlService {
     private final HeaderHelper headerHelper;
 
     public CustomResponse onLoadCreateUrl(LoggedInUser user) {
-      return CustomResponse.success(prepareCreateUrlLoadResponse(user), UmsResponseMessageEnum.FETCHED_SUCCESSFULLY) ;
+        return CustomResponse.success(prepareCreateUrlLoadResponse(user), UmsResponseMessageEnum.FETCHED_SUCCESSFULLY);
     }
 
     private OnLoadCreateUrlResponse prepareCreateUrlLoadResponse(LoggedInUser user) {

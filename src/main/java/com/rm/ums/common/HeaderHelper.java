@@ -2,7 +2,6 @@ package com.rm.ums.common;
 
 import com.rm.ums.common.entities.HeaderConfigEntity;
 import com.rm.ums.common.entities.HeaderMappingEntity;
-import com.rm.ums.common.enums.MenuEnum;
 import com.rm.ums.common.model.response.HeaderResponse;
 import com.rm.ums.common.model.response.dto.LoggedInUser;
 import com.rm.ums.common.repositories.HeaderMappingRepository;
@@ -20,7 +19,7 @@ public class HeaderHelper {
     private final HeaderMappingRepository headerMappingRepo;
 
     public List<HeaderResponse> findHeaders(LoggedInUser loggedInUser, Long menuId) {
-        List<HeaderMappingEntity> headerMappings = headerMappingRepo.findHeaderMapping(loggedInUser.roleId(), MenuEnum.CREATE_URL.id());
+        List<HeaderMappingEntity> headerMappings = headerMappingRepo.findHeaderMapping(loggedInUser.roleId(),menuId);
         return headerMappings.stream()
                 .map(this::toHeaderResponse)
                 .toList();

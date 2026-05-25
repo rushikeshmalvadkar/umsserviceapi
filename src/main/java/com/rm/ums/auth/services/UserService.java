@@ -5,6 +5,7 @@ import com.rm.ums.common.model.response.CustomResponse;
 import com.rm.ums.common.repositories.UrlStatusRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,13 +15,14 @@ import static com.rm.ums.common.enums.UmsResponseMessageEnum.SIGNED_IN_SUCCESSFU
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class UserService {
 
     private final UrlStatusRepository urlStatusRepo;
 
     public CustomResponse signIn() {
         SignInResponse signInResponse = new SignInResponse();
-        signInResponse.setMetaData(prepareMetaData());
+            signInResponse.setMetaData(prepareMetaData());
         return CustomResponse.success(signInResponse, SIGNED_IN_SUCCESSFULLY);
     }
 

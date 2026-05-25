@@ -1,0 +1,20 @@
+GET http://localhost:9091/api/auth/sign-in
+
+###
+GET http://localhost:9091/api/ums/urls/create-url-on-load
+userId: 1
+roleId: 3
+device: weba
+
+###
+POST http://localhost:9091/api/ums/urls/create-url
+userId: 1
+roleId: 3
+device: web
+Content-Type: application/json
+
+{
+  "title": "Google",
+  "originalUrl": "https://www.google.com"
+
+}

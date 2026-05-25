@@ -4,7 +4,6 @@ import com.rm.ums.common.HeaderHelper;
 import com.rm.ums.common.enums.MenuEnum;
 import com.rm.ums.common.model.response.CustomResponse;
 import com.rm.ums.common.model.response.dto.LoggedInUser;
-import com.rm.ums.url.model.request.CreateUrlRequest;
 import com.rm.ums.url.model.response.OnLoadCreateUrlResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,21 +14,18 @@ import static com.rm.ums.common.enums.UmsResponseMessageEnum.FETCHED_SUCCESSFULL
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class UrlService {
+public class CreateUrlOnLoadService {
 
     private final HeaderHelper headerHelper;
 
-    public CustomResponse onLoadCreateUrl(LoggedInUser loggedInUser) {
-        return CustomResponse.success(prepareCreateUrlLoadResponse(loggedInUser), FETCHED_SUCCESSFULLY);
+    public CustomResponse onLoad(LoggedInUser loggedInUser) {
+        OnLoadCreateUrlResponse onLoadCreateUrlResponse = prepareOnLoadCreateUrlResponse(loggedInUser);
+        return CustomResponse.success(onLoadCreateUrlResponse, FETCHED_SUCCESSFULLY);
     }
 
-    private OnLoadCreateUrlResponse prepareCreateUrlLoadResponse(LoggedInUser loggedInUser) {
+    private OnLoadCreateUrlResponse prepareOnLoadCreateUrlResponse(LoggedInUser loggedInUser) {
         OnLoadCreateUrlResponse onLoadCreateUrlResponse = new OnLoadCreateUrlResponse();
         onLoadCreateUrlResponse.setHeaders(headerHelper.findHeaders(loggedInUser, MenuEnum.CREATE_URL.id()));
         return onLoadCreateUrlResponse;
-    }
-
-    public CustomResponse createUrl(LoggedInUser loggedInUser, CreateUrlRequest createUrlRequest) {
-            return null;
     }
 }

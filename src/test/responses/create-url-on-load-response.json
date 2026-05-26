@@ -1,0 +1,42 @@
+{
+  "data": {
+    "headers": [
+      {
+        "id": 1,
+        "displayName": "Title",
+        "mappingName": "title",
+        "headerType": "text",
+        "headerMappingId": 1,
+        "editable": true,
+        "filterable": true,
+        "sortable": true,
+        "optionSource": null
+      },
+      {
+        "id": 2,
+        "displayName": "Original Url",
+        "mappingName": "originalUrl",
+        "headerType": "text",
+        "headerMappingId": 2,
+        "editable": true,
+        "filterable": true,
+        "sortable": true,
+        "optionSource": null
+      },
+      {
+        "id": 3,
+        "displayName": "Slug",
+        "mappingName": "slug",
+        "headerType": "text",
+        "headerMappingId": 3,
+        "editable": true,
+        "filterable": true,
+        "sortable": true,
+        "optionSource": null
+      }
+    ]
+  },
+  "message": "Fetched successfully",
+  "code": 200,
+  "status": "SUCCESS"
+}

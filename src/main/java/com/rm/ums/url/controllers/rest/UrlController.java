@@ -4,8 +4,10 @@ import com.rm.ums.common.entities.constants.HeaderConstant;
 import com.rm.ums.common.model.response.CustomResponse;
 import com.rm.ums.common.model.response.dto.LoggedInUser;
 import com.rm.ums.url.model.request.CreateUrlRequest;
+import com.rm.ums.url.model.request.FetchUrlsRequest;
 import com.rm.ums.url.services.CreateUrlOnLoadService;
 import com.rm.ums.url.services.CreateUrlService;
+import com.rm.ums.url.services.FetchUrlService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +20,12 @@ public class UrlController {
 
     private static final String ENDPOINT_CREATE_URL_ON_LOAD = "/create-url-on-load";
     public static final String ENDPOINT_CREATE_URL = "/create-url";
+    public static final String ENDPOINT_FETCH_URLS = "/fetch-urls";
     private final CreateUrlOnLoadService createUrlOnLoadService;
     private final CreateUrlService createUrlService;
+    private final FetchUrlService fetchUrlService;
+
+
 
     @GetMapping(ENDPOINT_CREATE_URL_ON_LOAD)
     public ResponseEntity<CustomResponse> onLoadCreateUrl(
@@ -40,6 +46,18 @@ public class UrlController {
     ) {
         LoggedInUser loggedInUser = LoggedInUser.of(userId, roleId, device);
         return ResponseEntity.ok(createUrlService.create(loggedInUser, createUrlRequest));
+
+    }
+
+    @PostMapping(ENDPOINT_FETCH_URLS)
+    public ResponseEntity<CustomResponse> fetchUrls(
+            @RequestHeader(HeaderConstant.USER_ID) Long userId,
+            @RequestHeader(HeaderConstant.ROLE_ID) Long roleId,
+            @RequestHeader(HeaderConstant.DEVICE) String device,
+            @RequestBody FetchUrlsRequest fetchUrlsRequest
+            ) {
+        LoggedInUser loggedInUser = LoggedInUser.of(userId, roleId, device);
+        return ResponseEntity.ok(fetchUrlService.fetch(loggedInUser, fetchUrlsRequest));
 
     }
 

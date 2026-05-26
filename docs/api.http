@@ -18,3 +18,14 @@ Content-Type: application/json
   "originalUrl": "https://www.google.com"
 
 }
+
+###
+POST http://localhost:9091/api/ums/urls/fetch-urls
+userId: 1
+roleId: 3
+device: web
+Content-Type: application/json
+
+{
+  "urlStatusId" : 1
+}

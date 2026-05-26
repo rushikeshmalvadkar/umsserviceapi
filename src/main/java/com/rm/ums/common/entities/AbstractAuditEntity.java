@@ -25,4 +25,14 @@ public class AbstractAuditEntity extends AbstractDeleteFlagEntity {
     @Column(name = "last_updated_date")
     private ZonedDateTime lastUpdatedDate;
 
+    @PrePersist
+    public void prePersist() {
+        createdDate = ZonedDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        lastUpdatedDate = ZonedDateTime.now();
+    }
+
 }

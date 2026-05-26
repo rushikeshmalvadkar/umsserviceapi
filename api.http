@@ -1,7 +1,0 @@
-GET http://localhost:9091/api/auth/sign-in
-
-###
-GET http://localhost:9091/api/ums/urls/create-url-on-load
-userId: 1
-roleId: 3
-device: web

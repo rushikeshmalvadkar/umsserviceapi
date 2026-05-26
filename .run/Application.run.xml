@@ -3,6 +3,7 @@
     <option name="ACTIVE_PROFILES" value="local" />
     <module name="umsserviceapi" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.rm.ums.Application" />
+    <option name="VM_PARAMETERS" value="-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./heapdump.hprof" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

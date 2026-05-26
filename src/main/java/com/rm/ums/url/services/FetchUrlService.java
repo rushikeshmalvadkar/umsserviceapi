@@ -14,6 +14,7 @@ import com.rm.ums.url.model.response.FetchUrlResponseData;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ import static com.rm.ums.common.enums.MenuEnum.MY_SHORT_URLS;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional(readOnly = true)
 public class FetchUrlService {
 
     private final HeaderHelper headerHelper;

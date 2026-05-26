@@ -1,4 +1,4 @@
-package com.rm.ums.common;
+package com.rm.ums.common.helpers;
 
 import com.rm.ums.common.mapper.HeaderMapper;
 import com.rm.ums.common.model.response.HeaderResponse;

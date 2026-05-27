@@ -38,7 +38,6 @@ public class CreateUrlIT extends AbstractIT {
         String expectedResponse =
                 TestFileUtils.readFile(CREATE_URL_RESPONSE_JSON);
 
-
         Response response =
                 umsRequest()
                         .header(REQUEST_HEADER_ROLE_ID_KEY, CUSTOMER_ROLE_ID)

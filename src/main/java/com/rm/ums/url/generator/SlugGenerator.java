@@ -1,4 +1,4 @@
-package com.rm.ums.common.generator;
+package com.rm.ums.url.generator;
 
 import org.springframework.stereotype.Component;
 

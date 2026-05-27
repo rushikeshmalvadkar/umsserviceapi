@@ -15,6 +15,7 @@ Content-Type: application/json
 
 {
   "title": "Google",
-  "originalUrl": "https://www.google.com"
+  "originalUrl": "https://www.google.com",
+  "slug": "sg"
 
 }

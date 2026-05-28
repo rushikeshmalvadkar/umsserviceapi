@@ -1,0 +1,14 @@
+{
+  "data": {
+    "id": 1,
+    "title": "Test URL",
+    "originalUrl": "https://example.com",
+    "slug": "test",
+    "urlStatusId": 1,
+    "createdByUserId": 1
+  },
+  "message": "Created successfully",
+  "code": 201,
+  "status": "CREATED"
+}
+

@@ -1,0 +1,123 @@
+{
+  "data": {
+    "headers": [
+      {
+        "id": 1,
+        "displayName": "Title",
+        "mappingName": "title",
+        "headerType": "text",
+        "headerMappingId": 4,
+        "editable": true,
+        "filterable": true,
+        "sortable": true,
+        "optionSource": null
+      },
+      {
+        "id": 2,
+        "displayName": "Original Url",
+        "mappingName": "originalUrl",
+        "headerType": "text",
+        "headerMappingId": 5,
+        "editable": true,
+        "filterable": true,
+        "sortable": true,
+        "optionSource": null
+      },
+      {
+        "id": 3,
+        "displayName": "Slug",
+        "mappingName": "slug",
+        "headerType": "text",
+        "headerMappingId": 6,
+        "editable": true,
+        "filterable": true,
+        "sortable": true,
+        "optionSource": null
+      },
+      {
+        "id": 4,
+        "displayName": "Status",
+        "mappingName": "urlStatusId",
+        "headerType": "dropdown",
+        "headerMappingId": 7,
+        "editable": true,
+        "filterable": true,
+        "sortable": true,
+        "optionSource": "urlStatusList"
+      },
+      {
+        "id": 5,
+        "displayName": "Created On",
+        "mappingName": "createdDate",
+        "headerType": "date",
+        "headerMappingId": 8,
+        "editable": true,
+        "filterable": false,
+        "sortable": true,
+        "optionSource": null
+      },
+      {
+        "id": 6,
+        "displayName": "",
+        "mappingName": "",
+        "headerType": "copy",
+        "headerMappingId": 9,
+        "editable": true,
+        "filterable": false,
+        "sortable": false,
+        "optionSource": null
+      },
+      {
+        "id": 7,
+        "displayName": "",
+        "mappingName": "",
+        "headerType": "visit",
+        "headerMappingId": 10,
+        "editable": true,
+        "filterable": false,
+        "sortable": false,
+        "optionSource": null
+      }
+    ],
+    "data": [
+      {
+        "id": 1,
+        "title": "youtube",
+        "originalUrl": "https://www.youtube.com",
+        "slug": "yt",
+        "createdOn": "2026-05-28T08:20:00Z"
+      },
+      {
+        "id": 2,
+        "title": "github",
+        "originalUrl": "https://www.github.com",
+        "slug": "gh",
+        "createdOn": "2026-05-28T08:25:00Z"
+      },
+      {
+        "id": 3,
+        "title": "stackoverflow",
+        "originalUrl": "https://stackoverflow.com",
+        "slug": "so",
+        "createdOn": "2026-05-28T08:30:00Z"
+      },
+      {
+        "id": 4,
+        "title": "openai",
+        "originalUrl": "https://www.openai.com",
+        "slug": "oa",
+        "createdOn": "2026-05-28T08:35:00Z"
+      },
+      {
+        "id": 5,
+        "title": "wikipedia",
+        "originalUrl": "https://www.wikipedia.org",
+        "slug": "wiki",
+        "createdOn": "2026-05-28T08:40:00Z"
+      }
+    ]
+  },
+  "message": "Fetched successfully",
+  "code": 200,
+  "status": "SUCCESS"
+}

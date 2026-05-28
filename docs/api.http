@@ -14,7 +14,7 @@ device: web
 Content-Type: application/json
 
 {
-
+  "title": "google",
   "originalUrl": "https://www.google.com",
   "slug": "sg"
 

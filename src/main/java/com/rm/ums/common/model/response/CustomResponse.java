@@ -3,6 +3,7 @@ package com.rm.ums.common.model.response;
 import com.rm.ums.common.enums.UmsResponseMessageEnum;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.http.HttpStatus;
 
 import static com.rm.ums.common.enums.UmsResponseStatusEnum.CREATED;
 import static com.rm.ums.common.enums.UmsResponseStatusEnum.SUCCESS;
@@ -30,6 +31,14 @@ public class CustomResponse {
                 .message(message.value())
                 .code(CREATED.code())
                 .status(CREATED.name())
+                .build();
+    }
+
+    public static CustomResponse fail(String message, HttpStatus httpStatus) {
+        return builder()
+                .message(message)
+                .code(httpStatus.value())
+                .status(httpStatus.name())
                 .build();
     }
 }

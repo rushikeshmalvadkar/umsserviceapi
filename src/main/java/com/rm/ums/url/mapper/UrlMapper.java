@@ -14,6 +14,7 @@ import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 public interface UrlMapper {
 
     List<FetchUrlResponseData> toFetchUrlResponseData(List<UrlEntity> urls);
+
     @Mapping(source = "urlStatus.id", target = "urlStatusId")
     @Mapping(source = "createdBy.id", target = "createdByUserId")
     CreateUrlResponse toCreateUrlResponse(UrlEntity entity);

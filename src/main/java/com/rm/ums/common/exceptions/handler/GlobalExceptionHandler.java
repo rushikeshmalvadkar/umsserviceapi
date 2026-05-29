@@ -3,45 +3,42 @@ package com.rm.ums.common.exceptions.handler;
 import com.rm.ums.common.exceptions.UmsException;
 import com.rm.ums.common.model.response.CustomResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.FieldError;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.Objects;
+import java.util.List;
 
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public CustomResponse handleLmsException(MethodArgumentNotValidException ex) {
-        String message = prepareMethodArgumentNotValidationMessage(ex);
+    public ResponseEntity<CustomResponse> handleValidationException(MethodArgumentNotValidException ex) {
         logException(ex);
-        return CustomResponse.fail(message, HttpStatus.valueOf(ex.getStatusCode().value()));
+        return ResponseEntity.badRequest()
+                .body(CustomResponse.badRequest(extractValidationErrorMessages(ex)));
     }
 
     @ExceptionHandler(UmsException.class)
-    public CustomResponse handleLmsException(UmsException ex) {
+    public ResponseEntity<CustomResponse> handleUmsException(UmsException ex) {
         logException(ex);
-        return CustomResponse.fail(ex.getMessage(), ex.getHttpStatus());
+        return ResponseEntity.badRequest().body(CustomResponse.fail(ex.getMessage(),ex.getHttpStatus()));
     }
-
 
     private  void logException(Throwable ex) {
-        log.error("Exception occurred -> ", ex);
+        log.error("Exception occurred ::", ex);
     }
 
-    private static String prepareMethodArgumentNotValidationMessage(MethodArgumentNotValidException ex) {
+    private static List<String> extractValidationErrorMessages(MethodArgumentNotValidException ex) {
         return ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
-                .map(FieldError::getDefaultMessage)
-                .filter(Objects::nonNull)
-                .filter(msg -> !msg.isBlank())
-                .findFirst()
-                .orElse("Validation error");
+                .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                .toList();
     }
+
 
 }

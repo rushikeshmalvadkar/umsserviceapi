@@ -8,7 +8,7 @@ import static org.apache.commons.lang3.StringUtils.isNoneBlank;
 public record CreateUrlRequest(
         @NotBlank(message = "title is required")
         String title,
-        @NotBlank(message = "original url is required")
+        @NotBlank(message = "originalUrl is required")
         String originalUrl,
         String slug) {
 

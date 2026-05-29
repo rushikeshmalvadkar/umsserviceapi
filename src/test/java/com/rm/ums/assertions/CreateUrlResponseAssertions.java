@@ -68,6 +68,9 @@ public class CreateUrlResponseAssertions {
         assertThat(response.jsonPath().getInt("code"))
                 .isEqualTo(201);
 
+        assertThat(response.jsonPath().getBoolean("success"))
+                .isTrue();
+
         assertThat(response.jsonPath().getString("status"))
                 .isEqualTo("CREATED");
 

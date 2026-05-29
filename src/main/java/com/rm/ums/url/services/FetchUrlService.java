@@ -4,7 +4,6 @@ import com.rm.ums.auth.repositories.UrlRepository;
 import com.rm.ums.common.enums.UmsResponseMessageEnum;
 import com.rm.ums.common.helpers.HeaderHelper;
 import com.rm.ums.common.model.response.CustomResponse;
-import com.rm.ums.common.model.response.HeaderResponse;
 import com.rm.ums.common.model.response.dto.LoggedInUser;
 import com.rm.ums.url.entities.UrlEntity;
 import com.rm.ums.url.mapper.UrlMapper;
@@ -32,9 +31,10 @@ public class FetchUrlService {
     private final UrlMapper urlMapper;
 
     public CustomResponse fetch(LoggedInUser loggedInUser, FetchUrlsRequest fetchUrlsRequest) {
-        List<HeaderResponse> headers = headerHelper.findHeaders(loggedInUser, MY_SHORT_URLS.id());
-        List<FetchUrlResponseData> fetchUrlResponseDataList = prepareFetchUrlResponseData(loggedInUser, fetchUrlsRequest);
-        return CustomResponse.success(FetchUrlResponse.from(headers, fetchUrlResponseDataList), UmsResponseMessageEnum.FETCHED_SUCCESSFULLY);
+        FetchUrlResponse fetchUrlResponse = new FetchUrlResponse();
+        fetchUrlResponse.setData(prepareFetchUrlResponseData(loggedInUser, fetchUrlsRequest));
+        fetchUrlResponse.setHeaders(headerHelper.findHeaders(loggedInUser, MY_SHORT_URLS.id()));
+        return CustomResponse.success(fetchUrlResponse,UmsResponseMessageEnum.FETCHED_SUCCESSFULLY);
     }
 
     private List<FetchUrlResponseData> prepareFetchUrlResponseData(LoggedInUser loggedInUser, FetchUrlsRequest fetchUrlsRequest) {

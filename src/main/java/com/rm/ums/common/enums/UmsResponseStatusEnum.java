@@ -8,7 +8,8 @@ import static org.springframework.http.HttpStatus.OK;
 @RequiredArgsConstructor
 public enum UmsResponseStatusEnum {
     SUCCESS(OK.value()),
-    CREATED(HttpStatus.CREATED.value());
+    CREATED(HttpStatus.CREATED.value()),
+    BAD_REQUEST(HttpStatus.BAD_REQUEST.value());
 
     private final int code;
 

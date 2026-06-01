@@ -224,6 +224,24 @@ device : web
 }
 ```
 
+#### Check slug API
+
+* create new GET endpoint /api/ums/urls/check-slug?slug=DbExploration
+* Response Payload
+
+```json
+{
+  "data": {
+    "slugAlreadyExists": true
+  },
+  "message": "Checked successfully",
+  "code": 200,
+  "status": "SUCCESS",
+  "success": true
+}
+```
+
+
 #### Fetch Urls API
 
 * create new POST endpoint /api/ums/urls/fetch-urls

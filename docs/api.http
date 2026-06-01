@@ -30,3 +30,8 @@ Content-Type: application/json
 {
   "urlStatusId" : 1
 }
+
+###
+GET http://localhost:9091/api/ums/urls/check-slug?slug=%20sg
+
+

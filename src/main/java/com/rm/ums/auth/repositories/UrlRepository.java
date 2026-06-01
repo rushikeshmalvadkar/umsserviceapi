@@ -15,4 +15,6 @@ public interface UrlRepository extends JpaRepository<UrlEntity, Long>, JpaSpecif
             and u.deleteFlag=false                        
             """)
     List<UrlEntity> fetchUrls(@Param("statusId") Long statusId);
+
+    boolean existsBySlug(String slug);
 }

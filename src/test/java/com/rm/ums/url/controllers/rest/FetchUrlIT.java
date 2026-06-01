@@ -11,7 +11,7 @@ import org.springframework.test.context.jdbc.Sql;
 import static org.hamcrest.Matchers.equalTo;
 
 @Sql(
-        scripts = "/sql/insert/insert-urls.sql",
+        scripts = "/sql/test-data/insert-urls.sql",
         executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
 )
 public class FetchUrlIT extends AbstractIT {

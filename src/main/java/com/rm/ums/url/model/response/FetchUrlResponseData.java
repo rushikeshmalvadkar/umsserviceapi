@@ -5,12 +5,12 @@ import lombok.Data;
 import java.time.Instant;
 
 @Data
-public class FetchUrlsDataResponse {
+public class FetchUrlResponseData {
+
     private Long id;
     private String title;
     private String originalUrl;
     private String slug;
-    private Long urlStatusId;
-    private String urlStatusName;
-    private Instant createdDate;
+    private Instant createdOn;
+
 }

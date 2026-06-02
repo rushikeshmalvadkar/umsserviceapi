@@ -8,7 +8,7 @@ import com.rm.ums.url.model.request.FetchUrlsRequest;
 import com.rm.ums.url.services.CheckSlugService;
 import com.rm.ums.url.services.CreateUrlOnLoadService;
 import com.rm.ums.url.services.CreateUrlService;
-import com.rm.ums.url.services.FetchUrlsService;
+import com.rm.ums.url.services.FetchUrlService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ public class UrlController {
     private static final String ENDPOINT_CHECK_SLUG = "/check-slug";
     private final CreateUrlOnLoadService createUrlOnLoadService;
     private final CreateUrlService createUrlService;
-    private final FetchUrlsService fetchUrlService;
+    private final FetchUrlService fetchUrlService;
     private final CheckSlugService checkSlugService;
 
 
@@ -60,7 +60,7 @@ public class UrlController {
             @RequestBody FetchUrlsRequest fetchUrlsRequest
             ) {
         LoggedInUser loggedInUser = LoggedInUser.of(userId, roleId, device);
-        return ResponseEntity.ok(fetchUrlService.fetchUrls(fetchUrlsRequest,loggedInUser));
+        return ResponseEntity.ok(fetchUrlService.fetch(loggedInUser, fetchUrlsRequest));
 
     }
 
@@ -68,4 +68,6 @@ public class UrlController {
     public ResponseEntity<CustomResponse> checkSlug(@RequestParam("slug") String slug) {
         return ResponseEntity.ok(checkSlugService.check(slug));
     }
+
+
 }

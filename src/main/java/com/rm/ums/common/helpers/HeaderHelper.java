@@ -21,8 +21,8 @@ public class HeaderHelper {
     private final HeaderMapper headerMapper;
 
     public List<HeaderResponse> findHeaders(LoggedInUser loggedInUser, Long menuId) {
-        List<HeaderResponse> headerMappings = headerMapper.toHeaderResponseList(headerMappingRepo.findHeaderMapping(loggedInUser.roleId(), menuId));
-        log.debug("Total Headers :: {} for role id :: {} and menu id :: {}", headerMappings.size(), loggedInUser.roleId(), menuId);
-        return headerMappings;
+        List<HeaderResponse> headerResponseList = headerMapper.toHeaderResponseList(headerMappingRepo.findHeaderMapping(loggedInUser.roleId(), menuId));
+        log.debug("Headers size :: {} for role id :: {} and menu id :: {}", headerResponseList.size(), loggedInUser.roleId(), menuId);
+        return headerResponseList;
     }
 }

@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class FetchUrlsResponse {
+public class FetchUrlResponse {
     private   List<HeaderResponse> headers;
-    private  List<FetchUrlsDataResponse> data;
+    private  List<FetchUrlResponseData> data;
 }

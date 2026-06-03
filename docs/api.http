@@ -34,4 +34,7 @@ Content-Type: application/json
 ###
 GET http://localhost:9091/api/ums/urls/check-slug?slug=%20sg
 
+###
+GET http://localhost:9091/api/ums/urls/visit-url/slug
+
 

@@ -23,11 +23,11 @@ public class UrlController {
     public static final String ENDPOINT_CREATE_URL = "/create-url";
     public static final String ENDPOINT_FETCH_URLS = "/fetch-urls";
     private static final String ENDPOINT_CHECK_SLUG = "/check-slug";
+
     private final CreateUrlOnLoadService createUrlOnLoadService;
     private final CreateUrlService createUrlService;
     private final FetchUrlsService fetchUrlService;
     private final CheckSlugService checkSlugService;
-
 
 
     @GetMapping(ENDPOINT_CREATE_URL_ON_LOAD)
@@ -58,9 +58,9 @@ public class UrlController {
             @RequestHeader(HeaderConstant.ROLE_ID) Long roleId,
             @RequestHeader(HeaderConstant.DEVICE) String device,
             @RequestBody FetchUrlsRequest fetchUrlsRequest
-            ) {
+    ) {
         LoggedInUser loggedInUser = LoggedInUser.of(userId, roleId, device);
-        return ResponseEntity.ok(fetchUrlService.fetchUrls(fetchUrlsRequest,loggedInUser));
+        return ResponseEntity.ok(fetchUrlService.fetchUrls(fetchUrlsRequest, loggedInUser));
 
     }
 
@@ -68,4 +68,5 @@ public class UrlController {
     public ResponseEntity<CustomResponse> checkSlug(@RequestParam("slug") String slug) {
         return ResponseEntity.ok(checkSlugService.check(slug));
     }
+
 }

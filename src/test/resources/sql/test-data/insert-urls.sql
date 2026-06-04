@@ -12,12 +12,12 @@ VALUES
 INSERT INTO urls
 (id, title, original_url, slug, url_status_id, delete_flag, created_by, created_date, last_updated_by, last_updated_date)
 VALUES
-    (2, 'github', 'https://www.github.com', 'gh', 2, 0, 1, '2026-05-28 08:25:00', NULL, NULL);
+    (2, 'github', 'https://www.github.com', 'gh', 1, 0, 1, '2026-05-28 08:25:00', NULL, NULL);
 
 INSERT INTO urls
 (id, title, original_url, slug, url_status_id, delete_flag, created_by, created_date, last_updated_by, last_updated_date)
 VALUES
-    (3, 'stackoverflow', 'https://stackoverflow.com', 'so', 1, 0, 1, '2026-05-28 08:30:00', NULL, NULL);
+    (3, 'stackoverflow', 'https://stackoverflow.com', 'so', 2, 0, 1, '2026-05-28 08:30:00', NULL, NULL);
 
 INSERT INTO urls
 (id, title, original_url, slug, url_status_id, delete_flag, created_by, created_date, last_updated_by, last_updated_date)
@@ -27,4 +27,4 @@ VALUES
 INSERT INTO urls
 (id, title, original_url, slug, url_status_id, delete_flag, created_by, created_date, last_updated_by, last_updated_date)
 VALUES
-    (5, 'wikipedia', 'https://www.wikipedia.org', 'wiki', 1, 0, 1, '2026-05-28 08:40:00', NULL, NULL);
+    (5, 'wikipedia', 'https://www.wikipedia.org', 'wiki', 2, 0, 1, '2026-05-28 08:40:00', NULL, NULL);

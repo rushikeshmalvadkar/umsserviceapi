@@ -1,4 +1,4 @@
-package com.rm.ums.auth.repositories;
+package com.rm.ums.url.repositories;
 
 import com.rm.ums.url.entities.UrlEntity;
 import org.springframework.data.jpa.domain.Specification;
@@ -25,7 +25,7 @@ public interface UrlRepository extends JpaRepository<UrlEntity, Long>, JpaSpecif
                      WHERE u.slug = :slug
                      and u.deleteFlag = false
             """)
-    Optional<UrlEntity> findOriginalUrlBySlug(@Param("slug") String slug);
+    Optional<UrlEntity> findOriginalUrlBy(@Param("slug") String slug);
 
 
     boolean existsBySlug(String slug);

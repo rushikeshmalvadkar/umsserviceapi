@@ -1,74 +1,65 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Link Error</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Not Available</title>
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f6f7fb;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 90vh;
+            background: #f5f7fb;
+            font-family: Arial, sans-serif;
+            padding: 20px;
         }
 
         .card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            background: #ffffff;
+            width: 100%;
+            max-width: 550px;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             text-align: center;
-            width: 420px;
         }
 
-        h2 {
-            color: #e74c3c;
-            margin-bottom: 10px;
+        .icon {
+            font-size: 64px;
+            margin-bottom: 20px;
         }
 
-        p {
-            color: #555;
-            font-size: 14px;
+        h1 {
+            color: #222;
+            margin-bottom: 12px;
+            font-size: 28px;
         }
 
-        .slug {
-            margin-top: 10px;
-            font-size: 13px;
-            color: #888;
-            word-break: break-all;
+        .message {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 16px;
         }
 
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 18px;
-            background: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-        }
-
-        a:hover {
-            background: #2980b9;
-        }
     </style>
 </head>
-
 <body>
-
 <div class="card">
-
-    <h2 th:text="${message}">Something went wrong</h2>
-
-    <p>Please check the link or try again later.</p>
-
-    <div class="slug">
-        <strong>Slug:</strong>
-        <span th:text="${slug}">N/A</span>
-    </div>
+    <div class="icon">🔗</div>
+    <h1>Unable to Open URL</h1>
+    <p class="message"
+       th:text="${message}">
+        The requested short URL could not be found.
+    </p>
 </div>
-
 </body>
 </html>

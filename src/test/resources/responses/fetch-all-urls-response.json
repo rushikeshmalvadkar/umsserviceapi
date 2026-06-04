@@ -94,8 +94,8 @@
         "title": "github",
         "originalUrl": "https://www.github.com",
         "slug": "gh",
-        "urlStatusId": 2,
-        "urlStatusName": "Inactive",
+        "urlStatusId": 1,
+        "urlStatusName": "Active",
         "createdDate": "2026-05-28T08:25:00Z"
       },
       {
@@ -103,8 +103,8 @@
         "title": "stackoverflow",
         "originalUrl": "https://stackoverflow.com",
         "slug": "so",
-        "urlStatusId": 1,
-        "urlStatusName": "Active",
+        "urlStatusId": 2,
+        "urlStatusName": "Inactive",
         "createdDate": "2026-05-28T08:30:00Z"
       },
       {
@@ -121,8 +121,8 @@
         "title": "wikipedia",
         "originalUrl": "https://www.wikipedia.org",
         "slug": "wiki",
-        "urlStatusId": 1,
-        "urlStatusName": "Active",
+        "urlStatusId": 2,
+        "urlStatusName": "Inactive",
         "createdDate": "2026-05-28T08:40:00Z"
       }
     ]

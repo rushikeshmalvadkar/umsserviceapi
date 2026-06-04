@@ -1,7 +1,6 @@
 package com.rm.ums.url.controllers.rest;
 
-import com.rm.ums.url.enums.VisitUrlStatusEnum;
-import com.rm.ums.url.model.response.UrlVisitResponse;
+import com.rm.ums.url.model.response.VisitUrlResponse;
 import com.rm.ums.url.services.VisitUrlService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,21 +20,20 @@ public class VisitUrlController {
     private final VisitUrlService visitUrlService;
 
     @GetMapping(ENDPOINT_VISIT_URL)
-    public String visit(@PathVariable("slug") String slug, Model model) {
+    public String visitUrl(@PathVariable String slug, Model model) {
+        VisitUrlResponse visitUrlResponse = visitUrlService.visitUrl(slug);
+        return switch (visitUrlResponse.urlStatusEnum()) {
+            case VALID_SLUG -> forValidSlug(visitUrlResponse);
+            case UNKNOWN_SLUG, INACTIVE_SLUG -> forNotValidSlug(visitUrlResponse, model);
+        };
+    }
 
-        UrlVisitResponse urlVisitResponse = visitUrlService.visit(slug);
-        if (urlAvailableIn(urlVisitResponse)) {
-            String originalUrl = urlVisitResponse.getOriginalUrl();
-            log.info("URL found for slug :: {} URL :: {}", slug, originalUrl);
-            return "redirect:" + originalUrl;
-        }
-        log.info("URL not found for slug :: {}", slug);
-        model.addAttribute("message", VisitUrlStatusEnum.NOT_FOUND.getMessage());
+    private static String forNotValidSlug(VisitUrlResponse visitUrlResponse, Model model) {
+        model.addAttribute("message", visitUrlResponse.urlStatusEnum().message());
         return "visit-url-error";
     }
 
-    private static boolean urlAvailableIn(UrlVisitResponse urlVisitResponse) {
-        return urlVisitResponse.getVisitStatus() == VisitUrlStatusEnum.FOUND;
+    private static String forValidSlug(VisitUrlResponse visitUrlResponse) {
+        return "redirect:" + visitUrlResponse.originalUrl();
     }
-
 }

@@ -1,8 +1,8 @@
 package com.rm.ums.url.services;
 
-import com.rm.ums.auth.repositories.UrlRepository;
 import com.rm.ums.url.entities.UrlEntity;
-import com.rm.ums.url.model.response.UrlVisitResponse;
+import com.rm.ums.url.model.response.VisitUrlResponse;
+import com.rm.ums.url.repositories.UrlRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,15 +16,17 @@ public class VisitUrlService {
 
     private final UrlRepository urlRepository;
 
-    public UrlVisitResponse visit(String slug) {
-        return urlRepository.findOriginalUrlBySlug(slug).
-                map(this::processVistaUrl)
-                .orElseGet(UrlVisitResponse::notFound);
-
+    public VisitUrlResponse visitUrl(String slug) {
+        return urlRepository.findOriginalUrlBy(slug)
+                .map(this::toResponse)
+                .orElseGet(VisitUrlResponse::withUnknownSlugStatus);
     }
 
-    private UrlVisitResponse processVistaUrl(UrlEntity entity) {
-        return UrlVisitResponse.success(entity.getOriginalUrl());
+    private VisitUrlResponse toResponse(UrlEntity url) {
+        if (url.isInActive()) {
+            return VisitUrlResponse.withInactiveSlugStatus();
+        }
+        return VisitUrlResponse.withValidSlugStatus(url);
     }
 
 

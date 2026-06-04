@@ -41,6 +41,7 @@ public class FetchUrlIT extends AbstractIT {
 
         response.then()
                 .statusCode(200);
+        System.out.println(response.body().print());
 
         JSONAssert.assertEquals(
                 expectedResponse,

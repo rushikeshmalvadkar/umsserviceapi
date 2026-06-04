@@ -85,35 +85,45 @@
         "title": "youtube",
         "originalUrl": "https://www.youtube.com",
         "slug": "yt",
-        "createdOn": "2026-05-28T08:20:00Z"
+        "urlStatusId": 1,
+        "urlStatusName": "Active",
+        "createdDate": "2026-05-28T08:20:00Z"
       },
       {
         "id": 2,
         "title": "github",
         "originalUrl": "https://www.github.com",
         "slug": "gh",
-        "createdOn": "2026-05-28T08:25:00Z"
+        "urlStatusId": 2,
+        "urlStatusName": "Inactive",
+        "createdDate": "2026-05-28T08:25:00Z"
       },
       {
         "id": 3,
         "title": "stackoverflow",
         "originalUrl": "https://stackoverflow.com",
         "slug": "so",
-        "createdOn": "2026-05-28T08:30:00Z"
+        "urlStatusId": 1,
+        "urlStatusName": "Active",
+        "createdDate": "2026-05-28T08:30:00Z"
       },
       {
         "id": 4,
         "title": "openai",
         "originalUrl": "https://www.openai.com",
         "slug": "oa",
-        "createdOn": "2026-05-28T08:35:00Z"
+        "urlStatusId": 2,
+        "urlStatusName": "Inactive",
+        "createdDate": "2026-05-28T08:35:00Z"
       },
       {
         "id": 5,
         "title": "wikipedia",
         "originalUrl": "https://www.wikipedia.org",
         "slug": "wiki",
-        "createdOn": "2026-05-28T08:40:00Z"
+        "urlStatusId": 1,
+        "urlStatusName": "Active",
+        "createdDate": "2026-05-28T08:40:00Z"
       }
     ]
   },

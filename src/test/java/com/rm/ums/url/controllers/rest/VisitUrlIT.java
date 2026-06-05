@@ -18,8 +18,8 @@ public class VisitUrlIT  extends AbstractIT {
 
         Response response = umsRequestWithoutHeader()
                 .pathParam("slug","yt")
-                .redirects().follow(false)
                 .when()
+                .redirects().follow(false)
                 .get(ENDPOINT_VISIT_URL);
         String exceptedUrl = "https://www.youtube.com";
         VisitUrlAssertions.assertVisitUrlFound(response,exceptedUrl);

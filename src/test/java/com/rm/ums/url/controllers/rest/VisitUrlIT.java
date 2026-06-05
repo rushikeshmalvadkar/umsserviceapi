@@ -4,11 +4,16 @@ import com.rm.ums.assertions.VisitUrlAssertions;
 import com.rm.ums.common.AbstractIT;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.jdbc.Sql;
 
 import static com.rm.ums.url.enums.VisitUrlStatusEnum.INACTIVE_SLUG;
 import static com.rm.ums.url.enums.VisitUrlStatusEnum.UNKNOWN_SLUG;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Sql(
+        scripts = "/sql/test-data/insert-urls.sql",
+        executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
+)
 public class VisitUrlIT  extends AbstractIT {
 
     public static final String ENDPOINT_VISIT_URL = "/urls/visit-url/{slug}";

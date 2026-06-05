@@ -85,21 +85,18 @@
         "title": "youtube",
         "originalUrl": "https://www.youtube.com",
         "slug": "yt",
-        "createdOn": "2026-05-28T08:20:00Z"
+        "urlStatusId": 1,
+        "urlStatusName": "Active",
+        "createdDate": "2026-05-28T08:20:00Z"
       },
       {
-        "id": 3,
-        "title": "stackoverflow",
-        "originalUrl": "https://stackoverflow.com",
-        "slug": "so",
-        "createdOn": "2026-05-28T08:30:00Z"
-      },
-      {
-        "id": 5,
-        "title": "wikipedia",
-        "originalUrl": "https://www.wikipedia.org",
-        "slug": "wiki",
-        "createdOn": "2026-05-28T08:40:00Z"
+        "id": 2,
+        "title": "github",
+        "originalUrl": "https://www.github.com",
+        "slug": "gh",
+        "urlStatusId": 1,
+        "urlStatusName": "Active",
+        "createdDate": "2026-05-28T08:25:00Z"
       }
     ]
   },

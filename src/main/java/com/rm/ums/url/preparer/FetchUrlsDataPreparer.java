@@ -1,11 +1,11 @@
 package com.rm.ums.url.preparer;
 
-import com.rm.ums.auth.repositories.UrlRepository;
 import com.rm.ums.common.model.response.dto.LoggedInUser;
 import com.rm.ums.url.entities.UrlEntity;
 import com.rm.ums.url.mapper.UrlMapper;
 import com.rm.ums.url.model.request.FetchUrlsRequest;
 import com.rm.ums.url.model.response.FetchUrlsDataResponse;
+import com.rm.ums.url.repositories.UrlRepository;
 import com.rm.ums.url.specification.UrlSpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

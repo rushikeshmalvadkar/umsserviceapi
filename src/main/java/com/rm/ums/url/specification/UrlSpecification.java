@@ -16,11 +16,12 @@ public class UrlSpecification {
         return (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            predicates.add(cb.equal(root.get("createdBy").get("id"),loggedInUser.userId()));
-            predicates.add(cb.equal(root.get("deleteFlag"), false));
+
             if (request.hasUrlStatusId()) {
                 predicates.add(cb.equal(root.get("urlStatus").get("id"),request.urlStatusId()));
             }
+            predicates.add(cb.equal(root.get("createdBy").get("id"),loggedInUser.userId()));
+            predicates.add(cb.equal(root.get("deleteFlag"), false));
 
 
             return cb.and(predicates.toArray(new Predicate[0]));

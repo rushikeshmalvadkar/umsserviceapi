@@ -27,6 +27,7 @@ public class FetchUrlsService {
         FetchUrlsResponse fetchUrlsResponse = new FetchUrlsResponse();
         fetchUrlsResponse.setHeaders(headerHelper.findHeaders(loggedInUser, MY_SHORT_URLS.id()));
         fetchUrlsResponse.setData(fetchUrlsDataPreparer.prepare(fetchUrlsRequest, loggedInUser));
+        System.out.println(fetchUrlsResponse);
         return CustomResponse.success(fetchUrlsResponse, FETCHED_SUCCESSFULLY);
     }
 }

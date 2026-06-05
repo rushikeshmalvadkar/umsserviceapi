@@ -44,4 +44,10 @@ public class AbstractIT {
                 .contentType(ContentType.JSON);
     }
 
+    protected RequestSpecification umsRequestWithoutHeader() {
+        return RestAssured
+                .given()
+                .contentType(ContentType.JSON);
+    }
+
 }

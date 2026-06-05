@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import static com.rm.ums.url.enums.UrlStatusEnum.IN_ACTIVE;
+
 @Entity
 @Table(name = "urls")
 @Getter
@@ -24,5 +26,9 @@ public class UrlEntity extends AbstractAuditEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "url_status_id",nullable = false)
     private UrlStatusEntity urlStatus;
+
+    public boolean isInActive(){
+        return IN_ACTIVE.id().equals(urlStatus.getId());
+    }
 
 }

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface HeaderMappingRepository extends JpaRepository<HeaderMappingEntity, Long> {
 
@@ -25,4 +26,11 @@ public interface HeaderMappingRepository extends JpaRepository<HeaderMappingEnti
             @Param("roleId") Long roleId,
             @Param("menuId") Long menuId
     );
+
+    Optional<HeaderMappingEntity> findByIdAndDeleteFlagIsFalse(Long id);
+
+    default HeaderMappingEntity findByIdOrThrow(Long id){
+        return findByIdAndDeleteFlagIsFalse(id)
+                .orElseThrow(() -> new RuntimeException("Header mapping not found"));
+    }
 }

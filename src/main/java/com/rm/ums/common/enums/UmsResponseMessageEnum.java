@@ -8,7 +8,8 @@ public enum UmsResponseMessageEnum {
     SIGNED_IN_SUCCESSFULLY("Signed in successfully"),
     FETCHED_SUCCESSFULLY("Fetched successfully"),
     CREATED_SUCCESSFULLY("Created successfully"),
-    CHECKED_SUCCESSFULLY("Checked successfully");
+    CHECKED_SUCCESSFULLY("Checked successfully"),
+    UPDATED_SUCCESSFULLY("Updated successfully");
 
     private final String value;
 

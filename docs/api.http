@@ -37,4 +37,15 @@ GET http://localhost:9091/api/ums/urls/check-slug?slug=%20sg
 ###
 GET http://localhost:9091/api/ums/urls/visit-url/slug
 
+###
+PATCH http://localhost:9091/api/ums/urls/update-url
+userid: 1
+roleid: 3
+device: web
+Content-Type: application/json
 
+{
+  "headerMappingId":7,
+  "value": "1",
+  "recordId": 1
+}

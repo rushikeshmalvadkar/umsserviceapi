@@ -5,6 +5,7 @@ import com.rm.ums.common.entities.UrlStatusEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
 
 import static com.rm.ums.url.enums.UrlStatusEnum.IN_ACTIVE;
 
@@ -12,6 +13,7 @@ import static com.rm.ums.url.enums.UrlStatusEnum.IN_ACTIVE;
 @Table(name = "urls")
 @Getter
 @Setter
+@DynamicUpdate
 public class UrlEntity extends AbstractAuditEntity {
 
     @Column(name="title",nullable = false)
@@ -24,8 +26,11 @@ public class UrlEntity extends AbstractAuditEntity {
     private String slug;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "url_status_id",nullable = false)
+    @JoinColumn(name = "url_status_id",updatable = false,insertable = false)
     private UrlStatusEntity urlStatus;
+
+    @Column(name = "url_status_id", nullable = false)
+    private Long urlStatusId;
 
     public boolean isInActive(){
         return IN_ACTIVE.id().equals(urlStatus.getId());

@@ -46,6 +46,6 @@ Content-Type: application/json
 
 {
   "headerConfigId": 3,
-  "value": "gt",
+  "value": "ct",
   "recordId": 1
 }

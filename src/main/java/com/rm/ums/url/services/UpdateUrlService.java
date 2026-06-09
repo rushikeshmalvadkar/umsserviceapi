@@ -1,6 +1,6 @@
 package com.rm.ums.url.services;
 
-import com.rm.ums.common.checker.PermissionChecker;
+import com.rm.ums.common.aspects.EditPermissionCheck;
 import com.rm.ums.common.entities.HeaderConfigEntity;
 import com.rm.ums.common.enums.MenuEnum;
 import com.rm.ums.common.model.response.CustomResponse;
@@ -24,11 +24,10 @@ public class UpdateUrlService {
 
     private final GenericUpdater genericUpdater;
     private final HeaderConfigRepository headerConfigRepo;
-    private final PermissionChecker permissionChecker;
 
     @Transactional
+    @EditPermissionCheck(MenuEnum.MY_SHORT_URLS)
     public CustomResponse updateUrl(UpdateUrlRequest updateUrlRequest, LoggedInUser loggedInUser) {
-        permissionChecker.check(updateUrlRequest.headerConfigId(), MenuEnum.MY_SHORT_URLS.id(),loggedInUser);
         HeaderConfigEntity headerConfig = headerConfigRepo.findByIdOrThrow(updateUrlRequest.headerConfigId());
         genericUpdater.update(prepareEntityUpdateInput(updateUrlRequest, loggedInUser, headerConfig));
         return CustomResponse.success(Map.of("id", updateUrlRequest.recordId()), UPDATED_SUCCESSFULLY);

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class PermissionChecker {
+public class EditPermissionChecker {
     private final HeaderMappingRepository headerMappingRepo;
 
     public void check(Long headerConfigId, Long menuId, LoggedInUser loggedInUser){

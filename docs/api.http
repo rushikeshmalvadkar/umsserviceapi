@@ -45,7 +45,7 @@ device: web
 Content-Type: application/json
 
 {
-  "headerMappingId":7,
-  "value": "1",
+  "headerConfigId": 3,
+  "value": "gt",
   "recordId": 1
 }

@@ -36,6 +36,4 @@ public class GenericUpdater {
         Field lastUpdatedBy = jpaHelper.findFieldByColumnName(entity.getClass(), "last_updated_by");
         lastUpdatedBy.set(entity, loggedInUser.userId());
     }
-
-
 }

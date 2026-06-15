@@ -36,6 +36,4 @@ public class UpdateUrlService {
     private static EntityUpdateInput prepareEntityUpdateInput(UpdateUrlRequest updateUrlRequest, LoggedInUser loggedInUser, HeaderConfigEntity headerConfig) {
         return EntityUpdateInput.from(headerConfig, updateUrlRequest.recordId(), updateUrlRequest.value(), loggedInUser);
     }
-
-
 }

@@ -29,7 +29,7 @@
         "mappingName": "slug",
         "headerType": "text",
         "headerMappingId": 6,
-        "editable": true,
+        "editable": false,
         "filterable": true,
         "sortable": true,
         "optionSource": null
@@ -51,7 +51,7 @@
         "mappingName": "createdDate",
         "headerType": "date",
         "headerMappingId": 8,
-        "editable": true,
+        "editable": false,
         "filterable": false,
         "sortable": true,
         "optionSource": null
@@ -62,7 +62,7 @@
         "mappingName": "",
         "headerType": "copy",
         "headerMappingId": 9,
-        "editable": true,
+        "editable": false,
         "filterable": false,
         "sortable": false,
         "optionSource": null
@@ -73,7 +73,7 @@
         "mappingName": "",
         "headerType": "visit",
         "headerMappingId": 10,
-        "editable": true,
+        "editable": false,
         "filterable": false,
         "sortable": false,
         "optionSource": null

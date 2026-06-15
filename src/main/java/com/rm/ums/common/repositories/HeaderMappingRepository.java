@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface HeaderMappingRepository extends JpaRepository<HeaderMappingEntity, Long> {
 
@@ -25,4 +26,17 @@ public interface HeaderMappingRepository extends JpaRepository<HeaderMappingEnti
             @Param("roleId") Long roleId,
             @Param("menuId") Long menuId
     );
+
+    @Query("""
+    select hm from HeaderMappingEntity hm
+    join hm.roleMenu rm
+    where hm.headerConfig.id = :headerConfigId
+    and rm.role.id = :roleId
+    and rm.menu.id = :menuId
+    and hm.deleteFlag = false
+    """)
+    Optional<HeaderMappingEntity> findHeaderMappingBy(@Param("headerConfigId") Long headerConfigId,
+                                                      @Param("menuId") Long menuId,
+                                                      @Param("roleId") Long roleId);
+
 }

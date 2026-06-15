@@ -1,0 +1,8 @@
+{
+  "code": 403,
+  "status": "PERMISSION_DENIED",
+  "success": false,
+  "errors": [
+    "You don't have permission for this operation"
+  ]
+}

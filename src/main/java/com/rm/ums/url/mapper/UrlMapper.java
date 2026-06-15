@@ -20,7 +20,7 @@ public interface UrlMapper {
 
     List<FetchUrlsDataResponse> toFetchUrlDataResponseList(List<UrlEntity> entities);
 
-    @Mapping(source = "urlStatus.id", target = "urlStatusId")
+    @Mapping(source = "urlStatusId", target = "urlStatusId")
     @Mapping(source = "createdBy.id", target = "createdByUserId")
     CreateUrlResponse toCreateUrlResponse(UrlEntity entity);
 }

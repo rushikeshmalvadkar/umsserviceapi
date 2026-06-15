@@ -1,0 +1,9 @@
+{
+  "data": {
+    "id": 1
+  },
+  "message": "Updated successfully",
+  "code": 200,
+  "status": "SUCCESS",
+  "success": true
+}

@@ -5,10 +5,8 @@ import com.rm.ums.common.model.response.CustomResponse;
 import com.rm.ums.common.model.response.dto.LoggedInUser;
 import com.rm.ums.url.model.request.CreateUrlRequest;
 import com.rm.ums.url.model.request.FetchUrlsRequest;
-import com.rm.ums.url.services.CheckSlugService;
-import com.rm.ums.url.services.CreateUrlOnLoadService;
-import com.rm.ums.url.services.CreateUrlService;
-import com.rm.ums.url.services.FetchUrlsService;
+import com.rm.ums.url.model.request.UpdateUrlRequest;
+import com.rm.ums.url.services.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +21,18 @@ public class UrlController {
     public static final String ENDPOINT_CREATE_URL = "/create-url";
     public static final String ENDPOINT_FETCH_URLS = "/fetch-urls";
     private static final String ENDPOINT_CHECK_SLUG = "/check-slug";
+    private static final String ENDPOINT_UPDATE_URL = "/update-url";
 
     private final CreateUrlOnLoadService createUrlOnLoadService;
     private final CreateUrlService createUrlService;
     private final FetchUrlsService fetchUrlService;
     private final CheckSlugService checkSlugService;
+    private final UpdateUrlService updateUrlService;
+
 
 
     @GetMapping(ENDPOINT_CREATE_URL_ON_LOAD)
+
     public ResponseEntity<CustomResponse> onLoadCreateUrl(
             @RequestHeader(HeaderConstant.USER_ID) Long userId,
             @RequestHeader(HeaderConstant.ROLE_ID) Long roleId,
@@ -67,6 +69,17 @@ public class UrlController {
     @GetMapping(ENDPOINT_CHECK_SLUG)
     public ResponseEntity<CustomResponse> checkSlug(@RequestParam("slug") String slug) {
         return ResponseEntity.ok(checkSlugService.check(slug));
+    }
+
+    @PatchMapping(ENDPOINT_UPDATE_URL)
+    public ResponseEntity<CustomResponse> updateUrl(
+            @RequestHeader(HeaderConstant.USER_ID) Long userId,
+            @RequestHeader(HeaderConstant.ROLE_ID) Long roleId,
+            @RequestHeader(HeaderConstant.DEVICE) String device,
+            @RequestBody @Valid UpdateUrlRequest updateUrlRequest
+    ) {
+        LoggedInUser loggedInUser = LoggedInUser.of(userId, roleId, device);
+        return ResponseEntity.ok(updateUrlService.updateUrl(updateUrlRequest, loggedInUser));
     }
 
 }

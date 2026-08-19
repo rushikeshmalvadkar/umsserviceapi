@@ -16,16 +16,18 @@ public class VisitUrlService {
 
     private final UrlRepository urlRepository;
 
+    @Transactional
     public VisitUrlResponse visitUrl(String slug) {
         return urlRepository.findOriginalUrlBy(slug)
-                .map(this::toResponse)
+                .map(this::visit)
                 .orElseGet(VisitUrlResponse::withUnknownSlugStatus);
     }
 
-    private VisitUrlResponse toResponse(UrlEntity url) {
+    private VisitUrlResponse visit(UrlEntity url) {
         if (url.isInActive()) {
             return VisitUrlResponse.withInactiveSlugStatus();
         }
+        urlRepository.incrementViewCount(url.getId());
         return VisitUrlResponse.withValidSlugStatus(url);
     }
 

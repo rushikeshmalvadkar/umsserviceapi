@@ -16,23 +16,26 @@ import static com.rm.ums.url.enums.UrlStatusEnum.IN_ACTIVE;
 @DynamicUpdate
 public class UrlEntity extends AbstractAuditEntity {
 
-    @Column(name="title",nullable = false)
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name="original_url",nullable = false)
+    @Column(name = "original_url", nullable = false)
     private String originalUrl;
 
-    @Column(name="slug",nullable = false)
+    @Column(name = "slug", nullable = false)
     private String slug;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "url_status_id",updatable = false,insertable = false)
+    @JoinColumn(name = "url_status_id", updatable = false, insertable = false)
     private UrlStatusEntity urlStatus;
 
     @Column(name = "url_status_id", nullable = false)
     private Long urlStatusId;
 
-    public boolean isInActive(){
+    @Column(name = "view_count", nullable = false)
+    private Long viewCount=0L;
+
+    public boolean isInActive() {
         return IN_ACTIVE.id().equals(urlStatus.getId());
     }
 

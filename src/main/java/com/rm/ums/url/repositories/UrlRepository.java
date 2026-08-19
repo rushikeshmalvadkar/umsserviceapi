@@ -3,10 +3,7 @@ package com.rm.ums.url.repositories;
 import com.rm.ums.common.exceptions.UmsException;
 import com.rm.ums.url.entities.UrlEntity;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.repository.EntityGraph;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 
@@ -38,4 +35,12 @@ public interface UrlRepository extends JpaRepository<UrlEntity, Long>, JpaSpecif
         return findByIdAndDeleteFlagIsFalse(id)
                 .orElseThrow(() -> new UmsException("url not found",HttpStatus.NOT_FOUND));
     }
+
+    @Modifying
+    @Query("""
+    UPDATE UrlEntity u
+    SET u.viewCount = u.viewCount + 1
+    WHERE u.id = :id
+""")
+    void incrementViewCount(@Param("id") Long id);
 }

@@ -395,7 +395,7 @@ device : web
 * Http status code : 302 Found (Temporary Redirect)
 * Do not use 301 (Moved Permanently) http status code because
   browser will cache response, and we will not able track click counts.
-
+* Increase the view count when user visit the url
 * Response Header
 
 ```shell

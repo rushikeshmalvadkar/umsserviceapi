@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
@@ -20,10 +21,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
 
-@Sql(
-        scripts = "/sql/test-data/insert-urls.sql",
-        executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
-)
+import static org.awaitility.Awaitility.await;
+
+@Sql(scripts = "/sql/test-data/insert-urls.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 public class VisitUrlViewCountIt extends AbstractIT {
 
     @Autowired
@@ -37,11 +37,7 @@ public class VisitUrlViewCountIt extends AbstractIT {
     @DisplayName(value = "when single user visit url at time")
     void should_increase_view_count_when_user_visit_url() {
 
-        Response response = umsRequestWithoutHeader()
-                .pathParam("slug", "yt")
-                .when()
-                .redirects().follow(false)
-                .get(ENDPOINT_VISIT_URL);
+        Response response = umsRequestWithoutHeader().pathParam("slug", "yt").when().redirects().follow(false).get(ENDPOINT_VISIT_URL);
         String exceptedUrl = "https://www.youtube.com";
         VisitUrlAssertions.assertVisitUrlFound(response, exceptedUrl);
         Long urlViewCounts = urlRepo.findOriginalUrlBy("yt").map(UrlEntity::getViewCount).orElseThrow(() -> new UmsException("Url Not Found", HttpStatus.NOT_FOUND));
@@ -57,56 +53,39 @@ public class VisitUrlViewCountIt extends AbstractIT {
         CountDownLatch startLatch = new CountDownLatch(1);
 
         try {
-            List<CompletableFuture<Response>> futures =
-                    IntStream.range(0, NUMBER_OF_REQUEST)
-                            .mapToObj(i ->
-                                    CompletableFuture.supplyAsync(() -> {
-                                        try {
-                                            // Wait until all tasks are ready
-                                            startLatch.await();
+            List<CompletableFuture<Response>> futures = IntStream.range(0, NUMBER_OF_REQUEST).mapToObj(i -> CompletableFuture.supplyAsync(() -> {
+                try {
+                    // Wait until all tasks are ready
+                    startLatch.await();
 
-                                            // Send request
-                                            return umsRequestWithoutHeader()
-                                                    .pathParam("slug", "yt")
-                                                    .when()
-                                                    .redirects()
-                                                    .follow(false)
-                                                    .get(ENDPOINT_VISIT_URL);
+                    // Send request
+                    return umsRequestWithoutHeader().pathParam("slug", "yt").when().redirects().follow(false).get(ENDPOINT_VISIT_URL);
 
-                                        } catch (InterruptedException e) {
-                                            Thread.currentThread().interrupt();
-                                            throw new RuntimeException(e);
-                                        }
-                                    }, executor)
-                            )
-                            .toList();
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    throw new RuntimeException(e);
+                }
+            }, executor)).toList();
 
             // Release all waiting tasks
             startLatch.countDown();
 
             // Wait for all requests to complete
-            CompletableFuture.allOf(
-                    futures.toArray(new CompletableFuture[0])
-            ).join();
+            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
 
             // Verify every request was successful
-            futures.forEach(future ->
-                    Assertions.assertThat(future.join().getStatusCode())
-                            .isEqualTo(HttpStatus.FOUND.value())
-            );
+            futures.forEach(future -> Assertions.assertThat(future.join().getStatusCode()).isEqualTo(HttpStatus.FOUND.value()));
 
         } finally {
             executor.shutdown();
         }
 
-        Long viewCount = urlRepo.findOriginalUrlBy("yt")
-                .map(UrlEntity::getViewCount)
-                .orElseThrow(() ->
-                        new UmsException("Url Not Found", HttpStatus.NOT_FOUND)
-                );
+        // @Async updates may still be running after HTTP requests complete.
+        await().atMost(Duration.ofSeconds(10)).pollInterval(Duration.ofMillis(100)).untilAsserted(() -> {
 
-        Assertions.assertThat(viewCount)
-                .isEqualTo((long) NUMBER_OF_REQUEST);
+            long actualViewCount = urlRepo.findOriginalUrlBy("yt").map(UrlEntity::getViewCount).orElseThrow(() -> new UmsException("Url Not Found", HttpStatus.NOT_FOUND));
+
+            Assertions.assertThat(actualViewCount).isEqualTo(NUMBER_OF_REQUEST);
+        });
     }
-
 }

@@ -1,4 +1,4 @@
-package com.rm.ums.url.services;
+package com.rm.ums.url.counter;
 
 import com.rm.ums.url.repositories.UrlRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +15,6 @@ public class UrlViewCounter {
 
     @Transactional
     public void incrementViewCount(Long urlId) {
-        log.info("incrementViewCount process started for urlId : {} ", urlId);
-        try {
-            urlRepo.incrementViewCount(urlId);
-            log.info("incrementViewCount process ended for urlId : {} ", urlId);
-        } catch (Exception e) {
-            log.error("incrementViewCount process failed for urlId : {}", urlId, e);
-        }
+        urlRepo.incrementViewCount(urlId);
     }
 }

@@ -41,6 +41,6 @@ public interface UrlRepository extends JpaRepository<UrlEntity, Long>, JpaSpecif
     UPDATE UrlEntity u
     SET u.viewCount = u.viewCount + 1
     WHERE u.id = :id
-""")
+    """)
     void incrementViewCount(@Param("id") Long id);
 }

@@ -77,6 +77,17 @@
         "filterable": false,
         "sortable": false,
         "optionSource": null
+      },
+      {
+        "id": 8,
+        "displayName": "Views",
+        "mappingName": "viewCount",
+        "headerType": "number",
+        "headerMappingId": 21,
+        "editable": false,
+        "filterable": true,
+        "sortable": true,
+        "optionSource": null
       }
     ],
     "data": [
@@ -87,6 +98,7 @@
         "slug": "yt",
         "urlStatusId": 1,
         "urlStatusName": "Active",
+        "viewCount": 0,
         "createdDate": "2026-05-28T08:20:00Z"
       },
       {
@@ -96,6 +108,7 @@
         "slug": "gh",
         "urlStatusId": 1,
         "urlStatusName": "Active",
+        "viewCount": 0,
         "createdDate": "2026-05-28T08:25:00Z"
       }
     ]

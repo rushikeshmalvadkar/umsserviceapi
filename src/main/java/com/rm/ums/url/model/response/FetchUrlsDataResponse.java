@@ -12,5 +12,6 @@ public class FetchUrlsDataResponse {
     private String slug;
     private Long urlStatusId;
     private String urlStatusName;
+    private Long viewCount;
     private Instant createdDate;
 }

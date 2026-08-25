@@ -1,0 +1,34 @@
+Scenario 1: add expiration time when create the url
+  Given user create the url
+  When the user enters a valid start date and  expire date
+  And add the url
+  Then the user should get the message url added successfully
+
+
+Scenario 2: add expiration time when create the url add start time after expire time
+  Given user create the url
+  When the user enters  start date after the expire date
+  And create the url
+  Then the user get the error message start date should not be after expire date
+
+Scenario 3: add expiration time when create the url
+  Given user create the url
+  When the user enters  expire date before the start date
+  And create the url
+  Then the user get the error message expire date should not be before start date
+
+
+Scenario 4:  URL is accessible before expiration time
+  Given url have expiration time
+  When the visit url
+  Then the user get the url response
+
+Scenario 5:  URL is not accessible after expiration time
+  Given url have expiration time
+  When the visit url
+  Then the user get the error message url has been expired.
+
+Scenario 6:  URL is accessible before expiration time
+  Given url have expiration time
+  When the visit url
+  Then the user get the url response

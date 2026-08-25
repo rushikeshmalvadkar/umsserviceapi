@@ -19,4 +19,9 @@ public record VisitUrlResponse(String originalUrl, VisitUrlStatusEnum urlStatusE
     public static VisitUrlResponse withInactiveSlugStatus() {
         return new VisitUrlResponse(null, INACTIVE_SLUG);
     }
+
+    public static VisitUrlResponse withExpiredUrl() {
+        return new VisitUrlResponse(null, URL_EXPIRED);
+    }
+
 }

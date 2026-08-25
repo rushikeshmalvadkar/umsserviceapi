@@ -2,6 +2,8 @@ package com.rm.ums.assertions;
 
 import io.restassured.response.Response;
 
+import java.time.Instant;
+
 import static java.time.Instant.parse;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -16,14 +18,18 @@ public class CreateUrlResponseAssertions {
             String expectedTitle,
             String expectedOriginalUrl,
             String expectedSlug,
-            Long expectedCreatedByUserId
+            Long expectedCreatedByUserId,
+            Instant startAt,
+            Instant expireAt
     ) {
 
         assertCommonCreateUrlResponse(
                 response,
                 expectedTitle,
                 expectedOriginalUrl,
-                expectedCreatedByUserId
+                expectedCreatedByUserId,
+                startAt,
+                expireAt
         );
 
         String actualSlug =
@@ -40,14 +46,19 @@ public class CreateUrlResponseAssertions {
             Response response,
             String expectedTitle,
             String expectedOriginalUrl,
-            Long expectedCreatedByUserId
+            Long expectedCreatedByUserId,
+            Instant startAt,
+            Instant expireAt
     ) {
 
         assertCommonCreateUrlResponse(
                 response,
                 expectedTitle,
                 expectedOriginalUrl,
-                expectedCreatedByUserId
+                expectedCreatedByUserId,
+                startAt,
+                expireAt
+
         );
 
         String generatedSlug =
@@ -62,7 +73,9 @@ public class CreateUrlResponseAssertions {
             Response response,
             String expectedTitle,
             String expectedOriginalUrl,
-            Long expectedCreatedByUserId
+            Long expectedCreatedByUserId,
+            Instant startAt,
+            Instant expireAt
     ) {
 
         assertThat(response.jsonPath().getInt("code"))
@@ -94,6 +107,16 @@ public class CreateUrlResponseAssertions {
 
         String createdOn =
                 response.jsonPath().getString("data.createdOn");
+
+       String urlStartAccessTime =
+                response.jsonPath().getString("data.startAt");
+
+       assertThat(urlStartAccessTime).isEqualTo(startAt);
+
+        String urlExpirationDate =
+                response.jsonPath().getString("data.expireAt");
+
+        assertThat(urlExpirationDate).isEqualTo(expireAt);
 
         assertThat(createdOn)
                 .isNotBlank();

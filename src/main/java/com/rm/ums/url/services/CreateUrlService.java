@@ -2,13 +2,13 @@ package com.rm.ums.url.services;
 
 import com.rm.ums.common.model.response.CustomResponse;
 import com.rm.ums.common.model.response.dto.LoggedInUser;
-import com.rm.ums.common.repositories.UrlStatusRepository;
 import com.rm.ums.common.repositories.UserRepository;
 import com.rm.ums.url.entities.UrlEntity;
 import com.rm.ums.url.generator.SlugGenerator;
 import com.rm.ums.url.mapper.UrlMapper;
 import com.rm.ums.url.model.request.CreateUrlRequest;
 import com.rm.ums.url.repositories.UrlRepository;
+import com.rm.ums.url.validater.UrlExpirationTimeValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,8 +27,7 @@ public class CreateUrlService {
     private final SlugGenerator slugGenerator;
     private final UrlRepository urlRepository;
     private final UserRepository userRepository;
-    private final UrlStatusRepository urlStatusRepository;
-
+    private final UrlExpirationTimeValidator urlExpirationTimeValidator;
 
     @Transactional
     public CustomResponse create(LoggedInUser loggedInUser, CreateUrlRequest createUrlRequest) {
@@ -44,6 +43,13 @@ public class CreateUrlService {
         urlEntity.setCreatedBy(userRepository.getReferenceById(loggedInUser.userId()));
         urlEntity.setUrlStatusId(ACTIVE.id());
         urlEntity.setSlug(prepareSlug(createUrlRequest));
+
+        if (!createUrlRequest.hasNoExpirationTime()) {
+             urlExpirationTimeValidator.validate(createUrlRequest.startAt(),createUrlRequest.expireAt());
+            urlEntity.setStartAt(createUrlRequest.startAt());
+            urlEntity.setExpireAt(createUrlRequest.expireAt());
+        }
+
         UrlEntity savedUrlEntity = urlRepository.save(urlEntity);
         log.debug("Created new url with id :: {} and slug :: {}", savedUrlEntity.getId(), savedUrlEntity.getSlug());
         return savedUrlEntity;

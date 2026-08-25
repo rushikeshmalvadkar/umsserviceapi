@@ -2,8 +2,6 @@ package com.rm.ums.assertions;
 
 import io.restassured.response.Response;
 
-import java.time.Instant;
-
 import static java.time.Instant.parse;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -19,8 +17,8 @@ public class CreateUrlResponseAssertions {
             String expectedOriginalUrl,
             String expectedSlug,
             Long expectedCreatedByUserId,
-            Instant startAt,
-            Instant expireAt
+            String startAt,
+            String expireAt
     ) {
 
         assertCommonCreateUrlResponse(
@@ -47,8 +45,8 @@ public class CreateUrlResponseAssertions {
             String expectedTitle,
             String expectedOriginalUrl,
             Long expectedCreatedByUserId,
-            Instant startAt,
-            Instant expireAt
+            String startAt,
+            String expireAt
     ) {
 
         assertCommonCreateUrlResponse(
@@ -74,8 +72,8 @@ public class CreateUrlResponseAssertions {
             String expectedTitle,
             String expectedOriginalUrl,
             Long expectedCreatedByUserId,
-            Instant startAt,
-            Instant expireAt
+            String startAt,
+            String expireAt
     ) {
 
         assertThat(response.jsonPath().getInt("code"))
@@ -108,10 +106,10 @@ public class CreateUrlResponseAssertions {
         String createdOn =
                 response.jsonPath().getString("data.createdOn");
 
-       String urlStartAccessTime =
+        String urlStartAccessTime =
                 response.jsonPath().getString("data.startAt");
-
-       assertThat(urlStartAccessTime).isEqualTo(startAt);
+        System.out.println("urlStartAccessTime :::" + urlStartAccessTime);
+        assertThat(urlStartAccessTime).isEqualTo(startAt);
 
         String urlExpirationDate =
                 response.jsonPath().getString("data.expireAt");

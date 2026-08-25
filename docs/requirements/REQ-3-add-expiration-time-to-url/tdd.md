@@ -6,7 +6,7 @@
 
 ### Solution
 
-* We will add the field in create url request like startAt and expireAt in url entity
+* add start time abd expiry time
 
 ### DB changes
 
@@ -17,7 +17,7 @@
   * Mapping table = urls
   * Mapping column = start_at, expire_at
   * Mapping names = startAt, expireAt
-* Add header mappings for Customer and Admin role, views column will be non-editable
+* Add header mappings for Customer and Admin role, start date and expiry date  columns will be editable
 
 ### code logic 
 * when usr the visit the url first we check the start at and expire At with the current time  

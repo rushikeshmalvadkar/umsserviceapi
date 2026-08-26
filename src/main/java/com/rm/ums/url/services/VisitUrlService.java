@@ -31,7 +31,7 @@ public class VisitUrlService {
         }
 
         if (!urlExpirationTimeValidator.hasNoExpirationTime(url)) {
-            if (!urlExpirationTimeValidator.isShortUrlAvailableYet(url)) {
+            if (urlExpirationTimeValidator.isShortUrlNotAvailableYet(url)) {
                 return VisitUrlResponse.withUrlNotAvailableYet();
             }
             if (urlExpirationTimeValidator.isExpired(url)) {

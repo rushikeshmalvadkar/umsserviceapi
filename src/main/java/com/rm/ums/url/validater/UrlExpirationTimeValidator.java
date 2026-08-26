@@ -37,8 +37,8 @@ public class UrlExpirationTimeValidator {
         return true;
     }
 
-    public boolean isShortUrlAvailableYet(UrlEntity url) {
-        return url.getStartAt().isBefore(Instant.now());
+    public boolean isShortUrlNotAvailableYet(UrlEntity url) {
+        return url.getStartAt().isAfter(Instant.now());
     }
 
     public boolean hasNoExpirationTime(UrlEntity url) {

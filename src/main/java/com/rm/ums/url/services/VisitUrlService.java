@@ -1,6 +1,7 @@
 package com.rm.ums.url.services;
 
 import com.rm.ums.url.entities.UrlEntity;
+import com.rm.ums.url.enums.UrlExpirationStatusEnum;
 import com.rm.ums.url.model.events.UrlVisitedEvent;
 import com.rm.ums.url.model.response.VisitUrlResponse;
 import com.rm.ums.url.repositories.UrlRepository;
@@ -29,18 +30,17 @@ public class VisitUrlService {
         if (url.isInActive()) {
             return VisitUrlResponse.withInactiveSlugStatus();
         }
-
-        if (!urlExpirationTimeValidator.hasNoExpirationTime(url)) {
-            if (urlExpirationTimeValidator.isShortUrlNotAvailableYet(url)) {
-                return VisitUrlResponse.withUrlNotAvailableYet();
+        UrlExpirationStatusEnum urlExpirationStatusEnum = urlExpirationTimeValidator.canAccessStatus(url);
+        return switch (urlExpirationStatusEnum) {
+            case NOT_AVAILABLE_YET -> VisitUrlResponse.withUrlNotAvailableYet();
+            case EXPIRED -> VisitUrlResponse.withExpiredUrl();
+            case AVAILABLE -> {
+                publishVisitUrlEvent(url);
+                yield VisitUrlResponse.withValidSlugStatus(url);
             }
-            if (urlExpirationTimeValidator.isExpired(url)) {
-                return VisitUrlResponse.withExpiredUrl();
-            }
-        }
 
-        publishVisitUrlEvent(url);
-        return VisitUrlResponse.withValidSlugStatus(url);
+        };
+
     }
 
     private void publishVisitUrlEvent(UrlEntity url) {

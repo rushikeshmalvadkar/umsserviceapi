@@ -2,6 +2,7 @@ package com.rm.ums.url.validater;
 
 import com.rm.ums.common.exceptions.UmsException;
 import com.rm.ums.url.entities.UrlEntity;
+import com.rm.ums.url.enums.UrlExpirationStatusEnum;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,7 @@ public class UrlExpirationTimeValidator {
         if (startDateMissing(startAt, expireAt)) {
             throw new UmsException("Start date is required", HttpStatus.BAD_REQUEST);
         }
-        if (expirDateMissing(startAt, expireAt)) {
+        if (expireDateMissing(startAt, expireAt)) {
             throw new UmsException("Expiration date is required", HttpStatus.BAD_REQUEST);
         }
         if (isAfter(startAt, expireAt)) {
@@ -28,28 +29,40 @@ public class UrlExpirationTimeValidator {
 
     }
 
-    public boolean isExpired(UrlEntity url) {
 
+    public UrlExpirationStatusEnum canAccessStatus(UrlEntity url){
 
-        if (url.getExpireAt().isBefore(Instant.now())) {
-            return true;
+        if(hasNoExpirationTime(url.getStartAt(),url.getExpireAt())){
+            return UrlExpirationStatusEnum.AVAILABLE;
         }
-        return true;
+        if (isShortUrlNotAvailableYet(url.getStartAt())) {
+            return UrlExpirationStatusEnum.NOT_AVAILABLE_YET;
+        }
+        if(isExpired(url.getExpireAt())){
+            return UrlExpirationStatusEnum.EXPIRED;
+        }
+        return UrlExpirationStatusEnum.AVAILABLE;
+
     }
 
-    public boolean isShortUrlNotAvailableYet(UrlEntity url) {
-        return url.getStartAt().isAfter(Instant.now());
+    private boolean isExpired(Instant expireAt) {
+         return expireAt.isBefore(Instant.now());
     }
 
-    public boolean hasNoExpirationTime(UrlEntity url) {
-        return url.getStartAt() == null && url.getExpireAt() == null;
+
+    private boolean isShortUrlNotAvailableYet(Instant startAt) {
+        return startAt.isAfter(Instant.now());
+    }
+
+    private boolean hasNoExpirationTime(Instant startAt, Instant expireAt) {
+        return startAt == null && expireAt == null;
     }
 
     private static boolean isAfter(Instant startAt, Instant expireAt) {
         return startAt.isAfter(expireAt);
     }
 
-    private static boolean expirDateMissing(Instant startAt, Instant expireAt) {
+    private static boolean expireDateMissing(Instant startAt, Instant expireAt) {
         return expireAt == null && startAt != null;
     }
 

@@ -88,7 +88,30 @@
         "filterable": true,
         "sortable": true,
         "optionSource": null
+      },
+      {
+        "id": 9,
+        "displayName": "Start Date",
+        "mappingName": "startAt",
+        "headerType": "date",
+        "headerMappingId": 27,
+        "editable": true,
+        "filterable": true,
+        "sortable": true,
+        "optionSource": null
+      },
+      {
+        "id": 10,
+        "displayName": "Expiration Date",
+        "mappingName": "expireAt",
+        "headerType": "date",
+        "headerMappingId": 29,
+        "editable": true,
+        "filterable": true,
+        "sortable": true,
+        "optionSource": null
       }
+
     ],
     "data": [
       {
@@ -99,7 +122,9 @@
         "urlStatusId": 1,
         "urlStatusName": "Active",
         "viewCount": 0,
-        "createdDate": "2026-05-28T08:20:00Z"
+        "createdDate": "2026-05-28T08:20:00Z",
+        "startAt": null,
+        "expireAt":null
       },
       {
         "id": 2,
@@ -109,7 +134,21 @@
         "urlStatusId": 1,
         "urlStatusName": "Active",
         "viewCount": 0,
-        "createdDate": "2026-05-28T08:25:00Z"
+        "createdDate": "2026-05-28T08:25:00Z",
+        "startAt": "23 August 2026",
+        "expireAt":"24 August 2026"
+      },
+      {
+        "id": 6,
+        "title": "reddit",
+        "originalUrl": "https://www.reddit.com",
+        "slug": "re",
+        "urlStatusId": 1,
+        "urlStatusName": "Active",
+        "viewCount": 0,
+        "createdDate": "2026-05-28T08:45:00Z",
+        "startAt": "28 August 2026",
+        "expireAt":"29 August 2026"
       }
     ]
   },

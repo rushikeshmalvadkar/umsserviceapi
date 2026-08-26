@@ -19,9 +19,9 @@ public class CreateUrlIT extends AbstractIT {
     private static final String ENDPOINT_CREATE_URL = "/urls/create-url";
     private static final String CREATE_URL_WITH_CUSTOM_SLUG_REQUEST_JSON_FILE_PATH = "requests/create-url-with-custom-slug-request.json";
     private static final String CREATE_URL_WITHOUT_SLUG_REQUEST_JSON_FILE_PATH = "requests/create-url-without-slug-request.json";
-    private static final String CREATE_URL_WITH_EXPIRATION_TIME = "requests/create-url-with-expiration_time-request.json";
-    private static final String CREATE_URL_WITH_EXPIRATION_TIME_IF_START_TIME_AFTER_EXPIRE_TIME = "requests/create-url-with-expiration-time-start-time-after-expiry-time-request.json";
-    private static final String CREATE_URL_WITH_EXPIRATION_TIME_IF_EXPIRE_TIME_BEFORE_START_TIME = "requests/create-url-with-expiration-time-start-time-after-expiry-time-request.json";
+    private static final String CREATE_URL_WITH_EXPIRATION_TIME = "requests/create-url-with-expiration-time-request.json";
+    private static final String CREATE_URL_WITH_EXPIRATION_TIME_IF_START_TIME_AFTER_EXPIRE_TIME = "requests/create-url-with-expiration-time-start-date-after-expiry-date-request.json";
+    private static final String CREATE_URL_WITH_EXPIRATION_TIME_IF_EXPIRE_TIME_BEFORE_START_TIME = "requests/create-url-with-expiration-time-start-date-after-expiry-date-request.json";
 
     @Test
     public void should_return_create_url_response_when_user_has_given_custom_slug() throws Exception {
@@ -81,7 +81,7 @@ public class CreateUrlIT extends AbstractIT {
     }
 
     @Test
-    public void should_return_start_time_expired_time_in_url_response_when_user_give_the_expiration_time_during_create_url() throws Exception {
+    public void should_return_url_response_when_user_give_the_expiration_time_during_create_url() throws Exception {
 
         String request =
                 TestFileUtils.readFile(
@@ -107,7 +107,7 @@ public class CreateUrlIT extends AbstractIT {
     }
 
     @Test
-    public void should_return_error_message_if_start_time_after_expire_time_when_user_give_the_expiration_time_during_create_url_if_start_time_after_expire_time() throws Exception {
+    public void should_return_error_message_if_start_date_after_expire_date_when_user_give_the_expiration_time_during_create_url_if_start_time_after_expire_time() throws Exception {
 
         String request =
                 TestFileUtils.readFile(

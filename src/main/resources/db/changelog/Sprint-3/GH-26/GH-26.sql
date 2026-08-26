@@ -23,8 +23,19 @@ VALUES(10,'Expiration Date', 'date','expireAt','urls','expire_at',1, 1,NULL,0,1,
 set @my_urls_customer_role_id = (select rm.id  from role_menu rm where rm.role_id = 3 and rm.menu_id = 2);
 set @my_urls_admin_role_id = (select rm.id  from role_menu rm where rm.role_id = 2 and rm.menu_id = 2);
 
+
 INSERT INTO header_mapping(header_config_id, role_menu_id, editable, display_order, created_by, created_date)
 VALUES (9,@my_urls_customer_role_id,1,9,1,UTC_TIMESTAMP()),
        (9,@my_urls_admin_role_id,1,9,1,UTC_TIMESTAMP()),
        (10,@my_urls_customer_role_id,1,10,1,UTC_TIMESTAMP()),
        (10,@my_urls_admin_role_id,1,10,1,UTC_TIMESTAMP());
+
+--changeset Rushikesh Malvadkar:4-insert-start-at-expire-date-detail-in-header_mapping_table_for_my_url_menu
+set @my_urls_customer_role_my_url_rolr_menu_id = (select rm.id  from role_menu rm where rm.role_id = 3 and rm.menu_id = 3);
+set @my_urls_admin_role_my_url_role_menu_id = (select rm.id  from role_menu rm where rm.role_id = 2 and rm.menu_id = 3);
+
+INSERT INTO header_mapping(header_config_id, role_menu_id, editable, display_order, created_by, created_date)
+VALUES (9,@my_urls_customer_role_my_url_rolr_menu_id,1,9,1,UTC_TIMESTAMP()),
+       (9,@my_urls_admin_role_my_url_role_menu_id,1,9,1,UTC_TIMESTAMP()),
+       (10,@my_urls_customer_role_my_url_rolr_menu_id,1,10,1,UTC_TIMESTAMP()),
+       (10,@my_urls_admin_role_my_url_role_menu_id,1,10,1,UTC_TIMESTAMP());

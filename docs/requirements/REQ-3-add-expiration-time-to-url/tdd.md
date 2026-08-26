@@ -2,11 +2,11 @@
 
 ### Problem
 
-* User can set the expiration time when user create the url
+* Url Should have expiration time.
 
 ### Solution
 
-* add start time abd expiry time
+* user can add start time and  expiry time when user create the url 
 
 ### DB changes
 
@@ -19,9 +19,10 @@
   * Mapping names = startAt, expireAt
 * Add header mappings for Customer and Admin role, start date and expiry date  columns will be editable
 
-### code logic 
+### code logic
+
 * when usr the visit the url first we check the start at and expire At with the current time  
 ### Question
 
-* if user not want to add the expiration time then we can set the startAt and expir at can be null
+* if user not want to add the expiration time then we can set the startAt and expire at can be null
 * we should give only date or date and time 

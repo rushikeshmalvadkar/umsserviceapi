@@ -101,8 +101,8 @@ public class CreateUrlIT extends AbstractIT {
         long expectedCreatedByUserId = 1L;
         String expectedOriginalUrl = "https://medium.com/omarelgabrys-blog/database-introduction-part-1-4844fada1fb0";
         String expectedTitle = "Database Exploration Checklist";
-        String startAt="25 Aug 2026";
-        String expireAt="26 Aug 2026";
+        String startAt="2026-08-25";
+        String expireAt="2026-08-26";
         CreateUrlResponseAssertions.assertCreateUrlResponseWithGeneratedSlug(response, expectedTitle, expectedOriginalUrl, expectedCreatedByUserId,startAt,expireAt);
     }
 

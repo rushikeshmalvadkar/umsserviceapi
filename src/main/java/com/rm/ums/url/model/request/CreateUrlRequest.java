@@ -2,7 +2,7 @@ package com.rm.ums.url.model.request;
 
 import jakarta.validation.constraints.NotBlank;
 
-import java.time.Instant;
+import java.time.LocalDate;
 
 import static org.apache.commons.lang3.StringUtils.isNoneBlank;
 
@@ -13,8 +13,8 @@ public record CreateUrlRequest(
         @NotBlank(message = "originalUrl is required")
         String originalUrl,
         String slug,
-        Instant startAt,
-        Instant expireAt) {
+        LocalDate startAt,
+        LocalDate expireAt) {
 
     public boolean hasSlug() {
         return isNoneBlank(slug);

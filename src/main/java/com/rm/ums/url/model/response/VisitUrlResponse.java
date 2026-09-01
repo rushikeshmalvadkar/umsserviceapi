@@ -24,6 +24,8 @@ public record VisitUrlResponse(String originalUrl, VisitUrlStatusEnum urlStatusE
         return new VisitUrlResponse(null, SHORT_URL_EXPIRED);
     }
 
-    public static VisitUrlResponse withUrlNotAvailableYet(){return new VisitUrlResponse(null,SHORT_URL_NOT_AVAILABLE_YET);}
+    public static VisitUrlResponse withUrlNotAvailableYet() {
+        return new VisitUrlResponse(null, SHORT_URL_NOT_AVAILABLE_YET);
+    }
 
 }

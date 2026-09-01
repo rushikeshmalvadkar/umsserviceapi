@@ -37,22 +37,31 @@ public class CreateUrlService {
     }
 
     private UrlEntity saveUrl(CreateUrlRequest createUrlRequest, LoggedInUser loggedInUser) {
+        validateExpiryDates(createUrlRequest);
+        return savedUrl(createUrlRequest, loggedInUser);
+    }
+
+    private UrlEntity savedUrl(CreateUrlRequest createUrlRequest, LoggedInUser loggedInUser) {
         UrlEntity urlEntity = new UrlEntity();
         urlEntity.setOriginalUrl(createUrlRequest.originalUrl());
         urlEntity.setTitle(createUrlRequest.title());
         urlEntity.setCreatedBy(userRepository.getReferenceById(loggedInUser.userId()));
         urlEntity.setUrlStatusId(ACTIVE.id());
         urlEntity.setSlug(prepareSlug(createUrlRequest));
-
-        if (!createUrlRequest.hasNoExpirationTime()) {
-             urlExpirationTimeValidator.validate(createUrlRequest.startAt(),createUrlRequest.expireAt());
-            urlEntity.setStartAt(createUrlRequest.startAt());
-            urlEntity.setExpireAt(createUrlRequest.expireAt());
-        }
-
+        processUrlExpirationIfUserHasGiven(createUrlRequest, urlEntity);
         UrlEntity savedUrlEntity = urlRepository.save(urlEntity);
         log.debug("Created new url with id :: {} and slug :: {}", savedUrlEntity.getId(), savedUrlEntity.getSlug());
         return savedUrlEntity;
+    }
+
+    private void validateExpiryDates(CreateUrlRequest createUrlRequest) {
+        urlExpirationTimeValidator.validate(createUrlRequest.startAt(), createUrlRequest.expireAt());
+    }
+
+    private static void processUrlExpirationIfUserHasGiven(CreateUrlRequest createUrlRequest, UrlEntity urlEntity) {
+        if (createUrlRequest.userIsCreatingExpiryBasedUrl()) {
+            urlEntity.setExpiryDates(createUrlRequest.startAt(), createUrlRequest.expireAt());
+        }
     }
 
     private String prepareSlug(CreateUrlRequest createUrlRequest) {

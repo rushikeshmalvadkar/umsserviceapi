@@ -14,13 +14,13 @@ public class UrlExpirationTimeValidator {
 
     public void validate(LocalDate startAt, LocalDate expireAt) {
 
-        if (startDateMissing(startAt, expireAt)) {
+        if (userHasGivenOnlyExpiryDateButNotStartDate(startAt, expireAt)) {
             throw new UmsException("Start date is required", HttpStatus.BAD_REQUEST);
         }
-        if (expireDateMissing(startAt, expireAt)) {
+        if (userHasGivenOnlyStartDateButNotExpiryDate(startAt, expireAt)) {
             throw new UmsException("Expiration date is required", HttpStatus.BAD_REQUEST);
         }
-        if (isAfter(startAt, expireAt)) {
+        if (userHasGivenWrongRangeOfStartAndExpiryDate(startAt, expireAt)) {
             throw new UmsException(
                     "Start date should not be after expiration date",
                     HttpStatus.BAD_REQUEST
@@ -29,11 +29,11 @@ public class UrlExpirationTimeValidator {
 
     }
 
-    public UrlExpirationStatusEnum canAccessStatus(UrlEntity url) {
+    private static boolean userHasGivenWrongRangeOfStartAndExpiryDate(LocalDate startAt, LocalDate expireAt) {
+        return startAt.isAfter(expireAt);
+    }
 
-        if (hasNoExpirationTime(url.getStartAt(), url.getExpireAt())) {
-            return UrlExpirationStatusEnum.AVAILABLE;
-        }
+    public UrlExpirationStatusEnum canAccessStatus(UrlEntity url) {
         if (isShortUrlNotAvailableYet(url.getStartAt())) {
             return UrlExpirationStatusEnum.NOT_AVAILABLE_YET;
         }
@@ -41,7 +41,6 @@ public class UrlExpirationTimeValidator {
             return UrlExpirationStatusEnum.EXPIRED;
         }
         return UrlExpirationStatusEnum.AVAILABLE;
-
     }
 
     private boolean isExpired(LocalDate expireAt) {
@@ -57,15 +56,11 @@ public class UrlExpirationTimeValidator {
         return startAt == null && expireAt == null;
     }
 
-    private static boolean isAfter(LocalDate startAt, LocalDate expireAt) {
-        return startAt.isAfter(expireAt);
-    }
-
-    private static boolean expireDateMissing(LocalDate startAt, LocalDate expireAt) {
+    private static boolean userHasGivenOnlyStartDateButNotExpiryDate(LocalDate startAt, LocalDate expireAt) {
         return expireAt == null && startAt != null;
     }
 
-    private static boolean startDateMissing(LocalDate startAt, LocalDate expireAt) {
+    private static boolean userHasGivenOnlyExpiryDateButNotStartDate(LocalDate startAt, LocalDate expireAt) {
         return startAt == null && expireAt != null;
     }
 }

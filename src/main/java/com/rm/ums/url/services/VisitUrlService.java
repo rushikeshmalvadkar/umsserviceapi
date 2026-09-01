@@ -1,9 +1,11 @@
 package com.rm.ums.url.services;
 
 import com.rm.ums.url.entities.UrlEntity;
+import com.rm.ums.url.enums.UrlExpirationStatusEnum;
 import com.rm.ums.url.model.events.UrlVisitedEvent;
 import com.rm.ums.url.model.response.VisitUrlResponse;
 import com.rm.ums.url.repositories.UrlRepository;
+import com.rm.ums.url.validater.UrlExpirationTimeValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ public class VisitUrlService {
 
     private final UrlRepository urlRepo;
     private final ApplicationEventPublisher eventPublisher;
+    private final UrlExpirationTimeValidator urlExpirationTimeValidator;
 
     public VisitUrlResponse visitUrl(String slug) {
         return urlRepo.findOriginalUrlBy(slug)
@@ -27,8 +30,17 @@ public class VisitUrlService {
         if (url.isInActive()) {
             return VisitUrlResponse.withInactiveSlugStatus();
         }
-        publishVisitUrlEvent(url);
-        return VisitUrlResponse.withValidSlugStatus(url);
+        UrlExpirationStatusEnum urlExpirationStatusEnum = urlExpirationTimeValidator.canAccessStatus(url);
+        return switch (urlExpirationStatusEnum) {
+            case NOT_AVAILABLE_YET -> VisitUrlResponse.withUrlNotAvailableYet();
+            case EXPIRED -> VisitUrlResponse.withExpiredUrl();
+            case AVAILABLE -> {
+                publishVisitUrlEvent(url);
+                yield VisitUrlResponse.withValidSlugStatus(url);
+            }
+
+        };
+
     }
 
     private void publishVisitUrlEvent(UrlEntity url) {

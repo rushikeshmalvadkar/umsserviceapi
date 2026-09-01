@@ -50,7 +50,8 @@ public class UrlController {
             @Valid @RequestBody CreateUrlRequest createUrlRequest
     ) {
         LoggedInUser loggedInUser = LoggedInUser.of(userId, roleId, device);
-        return ResponseEntity.ok(createUrlService.create(loggedInUser, createUrlRequest));
+        CustomResponse createUrlResponse = createUrlService.create(loggedInUser, createUrlRequest);
+        return ResponseEntity.ok(createUrlResponse);
 
     }
 

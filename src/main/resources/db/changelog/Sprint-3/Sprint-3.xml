@@ -5,4 +5,5 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
     <include file="db/changelog/Sprint-3/GH-24/GH-24.sql"/>
+    <include file="db/changelog/Sprint-3/GH-26/GH-26.sql"/>
 </databaseChangeLog>

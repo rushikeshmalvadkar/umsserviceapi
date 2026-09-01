@@ -3,6 +3,7 @@ package com.rm.ums.url.model.response;
 import lombok.Data;
 
 import java.time.Instant;
+import java.time.LocalDate;
 
 @Data
 public class FetchUrlsDataResponse {
@@ -14,4 +15,6 @@ public class FetchUrlsDataResponse {
     private String urlStatusName;
     private Long viewCount;
     private Instant createdDate;
+    private LocalDate startAt;
+    private LocalDate expireAt;
 }

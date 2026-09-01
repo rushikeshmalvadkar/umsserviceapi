@@ -57,4 +57,18 @@ public class VisitUrlIT  extends AbstractIT {
                         .asString();
         assertThat(response).contains(INACTIVE_SLUG.message());
     }
+
+//    @Test
+//    void should_show_error_message_when_slug_is_inactive() {
+//        String response =
+//                umsRequestWithoutHeader()
+//                        .pathParam("slug", "oa")
+//                        .when()
+//                        .get(ENDPOINT_VISIT_URL)
+//                        .then()
+//                        .statusCode(200)
+//                        .extract()
+//                        .asString();
+//        assertThat(response).contains(INACTIVE_SLUG.message());
+//    }
 }

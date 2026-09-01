@@ -12,5 +12,4 @@ public class UmsException extends RuntimeException {
         super(message);
         this.httpStatus = httpStatus;
     }
-
 }

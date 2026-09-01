@@ -16,14 +16,18 @@ public class CreateUrlResponseAssertions {
             String expectedTitle,
             String expectedOriginalUrl,
             String expectedSlug,
-            Long expectedCreatedByUserId
+            Long expectedCreatedByUserId,
+            String startAt,
+            String expireAt
     ) {
 
         assertCommonCreateUrlResponse(
                 response,
                 expectedTitle,
                 expectedOriginalUrl,
-                expectedCreatedByUserId
+                expectedCreatedByUserId,
+                startAt,
+                expireAt
         );
 
         String actualSlug =
@@ -40,14 +44,19 @@ public class CreateUrlResponseAssertions {
             Response response,
             String expectedTitle,
             String expectedOriginalUrl,
-            Long expectedCreatedByUserId
+            Long expectedCreatedByUserId,
+            String startAt,
+            String expireAt
     ) {
 
         assertCommonCreateUrlResponse(
                 response,
                 expectedTitle,
                 expectedOriginalUrl,
-                expectedCreatedByUserId
+                expectedCreatedByUserId,
+                startAt,
+                expireAt
+
         );
 
         String generatedSlug =
@@ -62,7 +71,9 @@ public class CreateUrlResponseAssertions {
             Response response,
             String expectedTitle,
             String expectedOriginalUrl,
-            Long expectedCreatedByUserId
+            Long expectedCreatedByUserId,
+            String startAt,
+            String expireAt
     ) {
 
         assertThat(response.jsonPath().getInt("code"))
@@ -94,6 +105,16 @@ public class CreateUrlResponseAssertions {
 
         String createdOn =
                 response.jsonPath().getString("data.createdOn");
+
+        String urlStartAccessTime =
+                response.jsonPath().getString("data.startAt");
+        System.out.println("urlStartAccessTime :::" + urlStartAccessTime);
+        assertThat(urlStartAccessTime).isEqualTo(startAt);
+
+        String urlExpirationDate =
+                response.jsonPath().getString("data.expireAt");
+
+        assertThat(urlExpirationDate).isEqualTo(expireAt);
 
         assertThat(createdOn)
                 .isNotBlank();

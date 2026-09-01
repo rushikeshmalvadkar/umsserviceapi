@@ -25,10 +25,22 @@ public class VisitUrlController {
         return switch (visitUrlResponse.urlStatusEnum()) {
             case VALID_SLUG -> forValidSlug(visitUrlResponse);
             case UNKNOWN_SLUG, INACTIVE_SLUG -> forNotValidSlug(visitUrlResponse, model);
+            case SHORT_URL_EXPIRED -> urlExpired(visitUrlResponse, model);
+            case SHORT_URL_NOT_AVAILABLE_YET -> urlNotAvailableYet(visitUrlResponse,model);
         };
     }
 
     private static String forNotValidSlug(VisitUrlResponse visitUrlResponse, Model model) {
+        model.addAttribute("message", visitUrlResponse.urlStatusEnum().message());
+        return "visit-url-error";
+    }
+
+    private static String  urlExpired(VisitUrlResponse visitUrlResponse, Model model) {
+        model.addAttribute("message", visitUrlResponse.urlStatusEnum().message());
+        return "visit-url-error";
+    }
+
+    private static String urlNotAvailableYet(VisitUrlResponse visitUrlResponse, Model model) {
         model.addAttribute("message", visitUrlResponse.urlStatusEnum().message());
         return "visit-url-error";
     }

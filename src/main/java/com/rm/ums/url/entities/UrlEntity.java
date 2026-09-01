@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.time.LocalDate;
+
 import static com.rm.ums.url.enums.UrlStatusEnum.IN_ACTIVE;
 
 @Entity
@@ -16,7 +18,7 @@ import static com.rm.ums.url.enums.UrlStatusEnum.IN_ACTIVE;
 @Setter
 @DynamicUpdate
 @DynamicInsert
-public class UrlEntity extends AbstractAuditEntity {
+public class    UrlEntity extends AbstractAuditEntity {
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -36,6 +38,13 @@ public class UrlEntity extends AbstractAuditEntity {
 
     @Column(name = "view_count", nullable = false)
     private Long viewCount ;
+
+    @Column(name="start_at")
+    private LocalDate startAt;
+
+    @Column(name="expire_at")
+    private LocalDate expireAt;
+
 
     public boolean isInActive() {
         return IN_ACTIVE.id().equals(urlStatus.getId());

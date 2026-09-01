@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
 
+import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.isNoneBlank;
 
 
@@ -20,7 +21,7 @@ public record CreateUrlRequest(
         return isNoneBlank(slug);
     }
 
-    public boolean hasNoExpirationTime() {
-        return startAt ==null && expireAt ==null;
+    public boolean userIsCreatingExpiryBasedUrl() {
+        return nonNull(startAt) && nonNull(expireAt);
     }
 }

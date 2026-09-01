@@ -30,17 +30,18 @@ public class VisitUrlService {
         if (url.isInActive()) {
             return VisitUrlResponse.withInactiveSlugStatus();
         }
-        UrlExpirationStatusEnum urlExpirationStatusEnum = urlExpirationTimeValidator.canAccessStatus(url);
-        return switch (urlExpirationStatusEnum) {
+        return switch (identifyAvailabilityOf(url)) {
             case NOT_AVAILABLE_YET -> VisitUrlResponse.withUrlNotAvailableYet();
             case EXPIRED -> VisitUrlResponse.withExpiredUrl();
             case AVAILABLE -> {
                 publishVisitUrlEvent(url);
                 yield VisitUrlResponse.withValidSlugStatus(url);
             }
-
         };
+    }
 
+    private UrlExpirationStatusEnum identifyAvailabilityOf(UrlEntity url) {
+        return urlExpirationTimeValidator.canAccessStatus(url);
     }
 
     private void publishVisitUrlEvent(UrlEntity url) {

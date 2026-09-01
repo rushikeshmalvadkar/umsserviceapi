@@ -18,7 +18,7 @@ import static com.rm.ums.url.enums.UrlStatusEnum.IN_ACTIVE;
 @Setter
 @DynamicUpdate
 @DynamicInsert
-public class    UrlEntity extends AbstractAuditEntity {
+public class UrlEntity extends AbstractAuditEntity {
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -37,17 +37,22 @@ public class    UrlEntity extends AbstractAuditEntity {
     private Long urlStatusId;
 
     @Column(name = "view_count", nullable = false)
-    private Long viewCount ;
+    private Long viewCount;
 
-    @Column(name="start_at")
+    @Column(name = "start_at")
     private LocalDate startAt;
 
-    @Column(name="expire_at")
+    @Column(name = "expire_at")
     private LocalDate expireAt;
 
 
     public boolean isInActive() {
         return IN_ACTIVE.id().equals(urlStatus.getId());
+    }
+
+    public void setExpiryDates(LocalDate startAt, LocalDate expireAt){
+        this.startAt = startAt;
+        this.expireAt = expireAt;
     }
 
 }

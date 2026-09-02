@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.io.IOException;
+import java.time.LocalDate;
+
 import static org.hamcrest.Matchers.equalTo;
 
 @Sql(
@@ -26,9 +29,7 @@ public class FetchUrlIT extends AbstractIT {
 
         String request = "{}";
 
-        String expectedResponse =
-                TestFileUtils.readFile(
-                        FETCH_ALL_URLS_RESPONSE_JSON_FILE_PATH);
+        String expectedResponse = getExpectedResponse(FETCH_ALL_URLS_RESPONSE_JSON_FILE_PATH);
 
 
         Response response =
@@ -61,9 +62,7 @@ public class FetchUrlIT extends AbstractIT {
                 }
                 """;
 
-        String expectedResponse =
-                TestFileUtils.readFile(
-                        FETCH_ACTIVE_URLS_RESPONSE_JSON_FILE_PATH);
+        String expectedResponse = getExpectedResponse(FETCH_ACTIVE_URLS_RESPONSE_JSON_FILE_PATH);
 
 
         Response response =
@@ -84,5 +83,14 @@ public class FetchUrlIT extends AbstractIT {
                 true
         );
 
+    }
+
+    private String getExpectedResponse(String filePath) throws IOException {
+        LocalDate startAt = LocalDate.now().plusDays(1);
+        LocalDate expireAt = LocalDate.now().plusDays(2);
+
+        return TestFileUtils.readFile(filePath)
+                .replace("${startAt}", startAt.toString())
+                .replace("${expireAt}", expireAt.toString());
     }
 }

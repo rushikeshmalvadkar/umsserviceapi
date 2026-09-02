@@ -14,6 +14,10 @@ public class UrlExpirationTimeValidator {
 
     public void validate(LocalDate startAt, LocalDate expireAt) {
 
+        if (hasNoExpirationTime(startAt, expireAt)) {
+            return;
+        }
+
         if (userHasGivenOnlyExpiryDateButNotStartDate(startAt, expireAt)) {
             throw new UmsException("Start date is required", HttpStatus.BAD_REQUEST);
         }
@@ -34,6 +38,11 @@ public class UrlExpirationTimeValidator {
     }
 
     public UrlExpirationStatusEnum canAccessStatus(UrlEntity url) {
+
+        if (hasNoExpirationTime(url.getStartAt(), url.getExpireAt())) {
+            return UrlExpirationStatusEnum.AVAILABLE;
+        }
+
         if (isShortUrlNotAvailableYet(url.getStartAt())) {
             return UrlExpirationStatusEnum.NOT_AVAILABLE_YET;
         }

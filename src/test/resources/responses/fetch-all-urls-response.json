@@ -123,7 +123,7 @@
         "viewCount": 0,
         "createdDate": "2026-05-28T08:20:00Z",
         "startAt": null,
-        "expireAt":null
+        "expireAt": null
       },
       {
         "id": 2,
@@ -135,7 +135,7 @@
         "viewCount": 0,
         "createdDate": "2026-05-28T08:25:00Z",
         "startAt": "2026-08-23",
-        "expireAt":"2026-08-24"
+        "expireAt": "2026-08-24"
       },
       {
         "id": 3,
@@ -159,7 +159,7 @@
         "viewCount": 0,
         "createdDate": "2026-05-28T08:35:00Z",
         "startAt": null,
-        "expireAt":null
+        "expireAt": null
       },
       {
         "id": 5,
@@ -171,7 +171,7 @@
         "viewCount": 0,
         "createdDate": "2026-05-28T08:40:00Z",
         "startAt": null,
-        "expireAt":null
+        "expireAt": null
       },
       {
         "id": 6,
@@ -182,8 +182,8 @@
         "urlStatusName": "Active",
         "viewCount": 0,
         "createdDate": "2026-05-28T08:45:00Z",
-        "startAt": "2026-08-28",
-        "expireAt":"2026-08-29"
+        "startAt": "${startAt}",
+        "expireAt": "${expireAt}"
       }
     ]
   },
